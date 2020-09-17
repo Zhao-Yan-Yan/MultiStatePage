@@ -10,6 +10,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         viewBinding.btnActivity.setOnClickListener {
             startActivity<MultiStateActivity>()
         }
+        viewBinding.btnGlobalActivity.setOnClickListener {
+            startActivity<GlobalMultiActivity>()
+        }
 
         viewBinding.btnFragment.setOnClickListener {
             startActivity<MultiFragmentActivity>()
@@ -23,6 +26,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         }
         viewBinding.btnNet.setOnClickListener {
             startActivity<MockNetActivity>()
+        }
+
+        viewBinding.btnViewModel.setOnClickListener {
+            startActivity<WithViewModelActivity>()
         }
     }
 }

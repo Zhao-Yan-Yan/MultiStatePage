@@ -14,7 +14,11 @@ class ViewPager2Activity : BaseActivity<ActivityViewPager2Binding>() {
         viewBinding.viewpager2.adapter = object : FragmentStateAdapter(this) {
             override fun getItemCount(): Int = 5
 
-            override fun createFragment(position: Int): Fragment = MultiStateFragment.newInstance()
+            override fun createFragment(position: Int): Fragment = if (position % 2 == 0) {
+                MultiStateFragment.newInstance()
+            } else {
+                GlobalMultiFragment.newInstance()
+            }
         }
     }
 }

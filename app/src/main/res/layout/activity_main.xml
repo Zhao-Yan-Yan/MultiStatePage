@@ -15,6 +15,13 @@
         android:textAllCaps="false" />
 
     <Button
+        android:id="@+id/btn_global_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Activity root"
+        android:textAllCaps="false" />
+
+    <Button
         android:id="@+id/btn_fragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,12 +35,12 @@
         android:text="ViewPager2中使用"
         android:textAllCaps="false" />
 
-    <Button
-        android:id="@+id/btn_recycle_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="RecycleView中使用"
-        android:textAllCaps="false" />
+    <!--    <Button
+            android:id="@+id/btn_recycle_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RecycleView中使用(异常)"
+            android:textAllCaps="false" />-->
 
     <Button
         android:id="@+id/btn_lottie"
@@ -47,4 +54,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="网络请求" />
+
+    <Button
+        android:id="@+id/btn_view_model"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="结合ViewModel Retrofit 协程 实现网络请求"
+        android:textAllCaps="false" />
 </LinearLayout>

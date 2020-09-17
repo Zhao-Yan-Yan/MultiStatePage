@@ -34,7 +34,7 @@ class MockNetActivity : BaseActivity<ActivityMockNetBinding>() {
                     Request.Builder().url("https://wanandroid.com/wxarticle/chapters/json").build()
                 val okHttpClient = OkHttpClient.Builder().build()
                 val call = okHttpClient.newCall(request)
-                val response = withContext(Dispatchers.IO) { call.execute().body?.string() }
+                val response = withContext(Dispatchers.IO) { call.execute().body()?.string() }
                 multiState.show<SuccessState>()
                 viewBinding.content.text = response
             } catch (e: Exception) {

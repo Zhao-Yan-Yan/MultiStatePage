@@ -1,6 +1,6 @@
 package com.zy.multistatepage
 
-import android.graphics.Color
+import android.app.Activity
 import android.view.View
 import android.view.ViewGroup
 import com.zy.multistatepage.state.EmptyState
@@ -34,6 +34,12 @@ object MultiStatePage {
 
     fun getDefault(): MutableMap<Class<out MultiState>, MultiState> = statePoll
 
+    /**
+     * 实现原理
+     * 1.根据目标view在父view中的位置索引,移除原目标view,
+     * 2.将MultiStateContainer添加到原view的索引处
+     * 3.MultiStateContainer 的 layoutParams 是原目标View的 layoutParams
+     */
     fun multiState(targetView: View, retryListener: () -> Unit = {}): MultiStateContainer {
         val parent = targetView.parent as ViewGroup?
         var targetViewIndex = 0
@@ -48,6 +54,27 @@ object MultiStatePage {
             targetViewParent.removeView(targetView)
             targetViewParent.addView(multiStateContainer, targetViewIndex, targetView.layoutParams)
         }
+        multiStateContainer.show<SuccessState>()
+        return multiStateContainer
+    }
+
+    /**
+     * 实现原理
+     * 1. android.R.id.content 是Activity setContentView 内容的父view
+     * 2. 在这个view中移除原本要添加的contentView
+     * 3. 将MultiStateContainer设置为 content的子View  MultiStateContainer中持有原有的Activity setContentView
+     */
+    fun multiStateActivity(
+        activity: Activity,
+        retryListener: () -> Unit = {}
+    ): MultiStateContainer {
+        val targetView = activity.findViewById<ViewGroup>(android.R.id.content)
+        val targetViewIndex = 0
+        val oldContent: View = targetView.getChildAt(targetViewIndex)
+        targetView.removeView(oldContent)
+        val oldLayoutParams = oldContent.layoutParams
+        val multiStateContainer = MultiStateContainer(oldContent.context, oldContent, retryListener)
+        targetView.addView(multiStateContainer, targetViewIndex, oldLayoutParams)
         multiStateContainer.show<SuccessState>()
         return multiStateContainer
     }

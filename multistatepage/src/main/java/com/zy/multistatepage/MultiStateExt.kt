@@ -1,5 +1,6 @@
 package com.zy.multistatepage
 
+import android.app.Activity
 import android.view.View
 
 /**
@@ -10,3 +11,5 @@ import android.view.View
  * @CreateDate: 2020/9/17 17:10
  */
 fun View.multiState(retryListener: () -> Unit = {}) = MultiStatePage.multiState(this, retryListener)
+
+fun Activity.multiStateActivityRoot(retryListener: () -> Unit = {}) = MultiStatePage.multiStateActivity(this, retryListener)
