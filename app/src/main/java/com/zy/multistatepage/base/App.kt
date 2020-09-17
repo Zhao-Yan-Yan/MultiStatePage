@@ -1,4 +1,4 @@
-package com.zy.multistatepage
+package com.zy.multistatepage.base
 
 import android.app.Application
 

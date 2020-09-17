@@ -1,5 +1,7 @@
 package com.zy.multistatepage
 
+import com.zy.multistatepage.base.BaseFragment
+import com.zy.multistatepage.base.mock
 import com.zy.multistatepage.databinding.FragmentMultiStateBinding
 
 /**
@@ -11,6 +13,13 @@ import com.zy.multistatepage.databinding.FragmentMultiStateBinding
  */
 class MultiStateFragment : BaseFragment<FragmentMultiStateBinding>() {
     override fun initPage() {
+        val multiState = MultiStatePage.multiState(viewBinding.fl1)
+        mock(multiState)
+    }
 
+    companion object {
+        fun newInstance(): MultiStateFragment{
+            return MultiStateFragment()
+        }
     }
 }

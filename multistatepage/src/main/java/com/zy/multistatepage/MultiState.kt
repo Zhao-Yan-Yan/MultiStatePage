@@ -17,10 +17,4 @@ abstract class MultiState {
 
     abstract fun enableReload(): Boolean
 
-    /*  fun getRootView(context: Context):View{
-          if (layoutId() != 0) {
-              View.inflate(context,layoutId(),null)
-          }
-          return
-      }*/
 }

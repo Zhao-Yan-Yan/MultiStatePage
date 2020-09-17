@@ -22,13 +22,6 @@
         android:textAllCaps="false" />
 
     <Button
-        android:id="@+id/btn_viewpager"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="ViewPager中使用"
-        android:textAllCaps="false" />
-
-    <Button
         android:id="@+id/btn_viewpager2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -46,17 +39,12 @@
         android:id="@+id/btn_lottie"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="结合Lottie动画"
-        android:textAllCaps="false" />
-    <Button
-        android:id="@+id/btn_ext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="state 扩展"
+        android:text="结合Lottie动画 (state 扩展)"
         android:textAllCaps="false" />
 
     <Button
-        android:text="网络请求"
+        android:id="@+id/btn_net"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="网络请求" />
 </LinearLayout>

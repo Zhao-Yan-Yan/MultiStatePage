@@ -46,5 +46,8 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.8'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.8'
 
+    implementation "com.airbnb.android:lottie:3.4.2"
+    implementation("com.squareup.okhttp3:okhttp:4.9.0")
+
     implementation project (':multistatepage')
 }

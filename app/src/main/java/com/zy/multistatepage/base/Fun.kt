@@ -1,5 +1,9 @@
-package com.zy.multistatepage
+package com.zy.multistatepage.base
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import com.zy.multistatepage.MultiStateContainer
 import com.zy.multistatepage.state.EmptyState
 import com.zy.multistatepage.state.ErrorState
 import com.zy.multistatepage.state.LoadingState
@@ -15,7 +19,7 @@ import kotlinx.coroutines.launch
  * @Description: TODO
  * @CreateDate: 2020/9/17 15:04
  */
-fun mock(multiStateContainer: MultiStateContainer,callBack: () -> Unit = {}) {
+fun mock(multiStateContainer: MultiStateContainer, callBack: () -> Unit = {}) {
     MainScope().launch {
         multiStateContainer.showLoading()
         val delayTime = (10..30).random() * 100.toLong()
@@ -50,4 +54,8 @@ fun MultiStateContainer.showLoading(callBack: () -> Unit = {}) {
     show<LoadingState> {
         callBack.invoke()
     }
+}
+
+inline fun <reified T : Activity> Activity.startActivity() {
+    startActivity(Intent(this, T::class.java))
 }

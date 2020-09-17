@@ -1,4 +1,4 @@
-package com.zy.multistatepage
+package com.zy.multistatepage.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,7 +17,7 @@ import java.lang.reflect.ParameterizedType
  */
 abstract class BaseFragment<VB : ViewBinding> : Fragment() {
     lateinit var viewBinding: VB
-
+    private var isLazyLoad = true
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -29,7 +29,14 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initPage()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (isLazyLoad) {
+            initPage()
+            isLazyLoad = false
+        }
     }
 
     abstract fun initPage()

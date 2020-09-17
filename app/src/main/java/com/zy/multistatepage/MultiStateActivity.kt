@@ -1,5 +1,7 @@
 package com.zy.multistatepage
 
+import com.zy.multistatepage.base.BaseActivity
+import com.zy.multistatepage.base.mock
 import com.zy.multistatepage.databinding.ActivityMultiStateBinding
 
 class MultiStateActivity : BaseActivity<ActivityMultiStateBinding>() {
