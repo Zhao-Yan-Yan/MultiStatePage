@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/btn_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Activity中使用"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fragment中使用"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ViewPager中使用"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_viewpager2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ViewPager2中使用"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_recycle_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="RecycleView中使用"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_lottie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="结合Lottie动画"
+        android:textAllCaps="false" />
+    <Button
+        android:id="@+id/btn_ext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="state 扩展"
+        android:textAllCaps="false" />
+
+    <Button
+        android:text="网络请求"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>
