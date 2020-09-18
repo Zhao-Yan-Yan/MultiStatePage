@@ -11,7 +11,6 @@ class MultiViewActivity : BaseActivity<ActivityMultiViewBinding>() {
             mockSuccess(it)
         }
         mockError(multiState1)
-
         val multiState2 = viewBinding.fl2.multiState {
             mockSuccess(it)
         }

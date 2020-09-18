@@ -1,10 +1,8 @@
 package com.zy.multistatepage
 
-import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Context
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -31,7 +29,7 @@ class MultiStateContainer(
     inline fun <reified T : MultiState> show(notify: (T) -> Unit = {}) {
         MultiStatePage.getDefault()[T::class.java]?.let { multiState ->
             removeAllViews()
-            multiState.onDestroy()
+            multiState.reset()
             if (multiState is SuccessState) {
                 addView(originTargetView)
                 originTargetView.doAnimator()

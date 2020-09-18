@@ -48,7 +48,12 @@
         android:layout_height="wrap_content"
         android:text="API"
         android:textAllCaps="false" />
-
+    <Button
+        android:id="@+id/btn_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="state回调刷新"
+        android:textAllCaps="false" />
     <Button
         android:id="@+id/btn_net"
         android:layout_width="match_parent"

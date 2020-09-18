@@ -25,6 +25,7 @@ class MultiStateFragment : BaseFragment<FragmentMultiStateBinding>() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        inflater.inflate(R.layout.activity_api, container, false)
         val root = super.onCreateView(inflater, container, savedInstanceState)
         multiState = root!!.multiState {
             mockSuccess(multiState)

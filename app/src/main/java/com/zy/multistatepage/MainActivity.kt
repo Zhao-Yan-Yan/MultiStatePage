@@ -26,6 +26,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         viewBinding.btnLottie.setOnClickListener {
             startActivity<LottieExtActivity>()
         }
+        //State 刷新
+        viewBinding.btnRefresh.setOnClickListener {
+            startActivity<RefreshStateActivity>()
+        }
         //结合网络请求
         viewBinding.btnNet.setOnClickListener {
             startActivity<MockNetActivity>()

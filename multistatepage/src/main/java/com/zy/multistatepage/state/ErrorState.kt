@@ -22,8 +22,8 @@ class ErrorState : MultiState() {
 
     override fun enableReload(): Boolean = true
 
-    override fun onDestroy() {
-        super.onDestroy()
-        errorMsg = "戳错了"
+    override fun reset() {
+        super.reset()
+        errorMsg = "出错了"
     }
 }
