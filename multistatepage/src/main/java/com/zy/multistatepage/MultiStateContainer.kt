@@ -6,6 +6,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.zy.multistatepage.state.SuccessState
 
@@ -34,6 +35,11 @@ class MultiStateContainer(
             if (multiState is SuccessState) {
                 addView(originTargetView)
                 originTargetView.doAnimator()
+                val targetViewLayoutParams = originTargetView.layoutParams
+                if (targetViewLayoutParams is ViewGroup.MarginLayoutParams) {
+                    targetViewLayoutParams.setMargins(0, 0, 0, 0)
+                    originTargetView.layoutParams = targetViewLayoutParams
+                }
             } else if (multiState.layoutId() != 0) {
                 val view = View.inflate(context, multiState.layoutId(), null)
                 if (multiState.enableReload()) {

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="15dp"
+    android:clipToPadding="false"
     tools:context=".MultiViewActivity">
 
     <LinearLayout
@@ -33,7 +34,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="150dp"
             android:layout_marginTop="15dp"
             android:orientation="horizontal">
 
@@ -62,7 +63,7 @@
         <FrameLayout
             android:id="@+id/fl5"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="250dp"
             android:layout_marginTop="15dp"
             android:background="@android:color/holo_red_light">
 

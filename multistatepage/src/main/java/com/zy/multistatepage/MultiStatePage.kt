@@ -3,6 +3,8 @@ package com.zy.multistatepage
 import android.app.Activity
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
+import androidx.core.view.marginBottom
 import com.zy.multistatepage.state.EmptyState
 import com.zy.multistatepage.state.ErrorState
 import com.zy.multistatepage.state.LoadingState
@@ -61,7 +63,10 @@ object MultiStatePage {
                 }
             }
             targetViewParent.removeView(targetView)
-            targetViewParent.addView(multiStateContainer, targetViewIndex, targetView.layoutParams)
+            val targetViewLayoutParams = targetView.layoutParams
+            val temp = targetView.layoutParams
+            targetViewParent.addView(multiStateContainer, targetViewIndex, temp)
+
         }
         multiStateContainer.show<SuccessState>()
         return multiStateContainer

@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ApiActivity"></activity>
         <activity android:name=".MultiViewActivity" />
         <activity android:name=".MockNetActivity" />
         <activity android:name=".LottieExtActivity" />
