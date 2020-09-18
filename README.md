@@ -1,7 +1,6 @@
 # MultiStatePage
 [![](https://jitpack.io/v/Zhao-Yan-Yan/MultiStatePage.svg)](https://jitpack.io/#Zhao-Yan-Yan/MultiStatePage)
 
-# MultiStatePage
 - 
 ## 使用场景
 - 
