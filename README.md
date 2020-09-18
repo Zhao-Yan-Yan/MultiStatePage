@@ -168,3 +168,38 @@ class LottieExtActivity : AppCompatActivity() {
     }
 }
 ```
+
+
+### 小技巧
+可以借助kotlin的拓展函数封装常用的状态
+```kotlin
+fun MultiStateContainer.showSuccess(callBack: (SuccessState) -> Unit = {}) {
+    show<SuccessState> {
+        callBack.invoke(it)
+    }
+}
+
+fun MultiStateContainer.showError(callBack: (ErrorState) -> Unit = {}) {
+    show<ErrorState> {
+        callBack.invoke(it)
+    }
+}
+
+fun MultiStateContainer.showEmpty(callBack: (EmptyState) -> Unit = {}) {
+    show<EmptyState> {
+        callBack.invoke(it)
+    }
+}
+
+fun MultiStateContainer.showLoading(callBack: (LoadingState) -> Unit = {}) {
+    show<LoadingState> {
+        callBack.invoke(it)
+    }
+}
+```
+
+调用
+```kotlin
+val multiStateContainer = multiStateActivityRoot()
+multiStateContainer.showLoading()
+```
