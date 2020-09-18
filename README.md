@@ -134,7 +134,7 @@ multiStateContainer.show<ErrorState>{errorState->
 
 #### 设置重试回调
 
-```
+```kotlin
 val multiStateContainer = MultiStatePage.multiState(view){
     Toast.makeText(context, "retry", Toast.LENGTH_SHORT).show()
 }
@@ -142,7 +142,7 @@ val multiStateContainer = MultiStatePage.multiState(view){
 
 ### 自定义State
 #### 1.继承`MultiState`
-```
+```kotlin
 class LottieWaitingState : MultiState() {
     //State布局
     override fun layoutId(): Int = R.layout.multi_lottie_waiting
@@ -159,7 +159,7 @@ class LottieWaitingState : MultiState() {
 
 #### 2.使用前需register
 
-```
+```kotlin
 class LottieExtActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
