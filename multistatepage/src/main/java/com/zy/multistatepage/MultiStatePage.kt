@@ -18,18 +18,24 @@ import com.zy.multistatepage.state.SuccessState
 object MultiStatePage {
     private var statePoll: MutableMap<Class<out MultiState>, MultiState> = mutableMapOf()
 
-    init {
+    fun register(multiState: MultiState): MultiStatePage {
+        if (!statePoll.containsKey(multiState::class.java)) {
+            statePoll[multiState::class.java] = multiState
+        }
+        return this
+    }
+
+    fun registerDefault() {
         register(SuccessState())
         register(EmptyState())
         register(ErrorState())
         register(LoadingState())
     }
 
-    fun register(multiState: MultiState): MultiStatePage {
-        if (!statePoll.containsKey(multiState::class.java)) {
-            statePoll[multiState::class.java] = multiState
+    fun unRegister(multiState: MultiState) {
+        if (statePoll.containsKey(multiState::class.java)) {
+            statePoll.remove(multiState::class.java)
         }
-        return this
     }
 
     fun getDefault(): MutableMap<Class<out MultiState>, MultiState> = statePoll
@@ -40,7 +46,10 @@ object MultiStatePage {
      * 2.将MultiStateContainer添加到原view的索引处
      * 3.MultiStateContainer 的 layoutParams 是原目标View的 layoutParams
      */
-    fun multiState(targetView: View, retryListener: () -> Unit = {}): MultiStateContainer {
+    fun multiState(
+        targetView: View,
+        retryListener: (multiStateContainer: MultiStateContainer) -> Unit = {}
+    ): MultiStateContainer {
         val parent = targetView.parent as ViewGroup?
         var targetViewIndex = 0
         val multiStateContainer = MultiStateContainer(targetView.context, targetView, retryListener)
@@ -66,7 +75,7 @@ object MultiStatePage {
      */
     fun multiStateActivity(
         activity: Activity,
-        retryListener: () -> Unit = {}
+        retryListener: (multiStateContainer: MultiStateContainer) -> Unit = {}
     ): MultiStateContainer {
         val targetView = activity.findViewById<ViewGroup>(android.R.id.content)
         val targetViewIndex = 0

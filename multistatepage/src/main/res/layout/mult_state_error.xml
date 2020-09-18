@@ -3,24 +3,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:gravity="center"
     android:orientation="vertical">
 
     <ImageView
         android:id="@+id/img_error"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:src="@mipmap/state_error" />
 
     <TextView
         android:id="@+id/tv_error_msg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="错误信息" />
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:maxEms="15"
+        android:text="空数据"
+        android:textColor="@android:color/darker_gray"
+        tools:text="信息" />
 
     <TextView
         android:id="@+id/tv_retry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="点击重试" />
+        android:layout_marginTop="5dp"
+        android:text="点击重试"
+        android:textColor="@android:color/primary_text_light" />
 </LinearLayout>

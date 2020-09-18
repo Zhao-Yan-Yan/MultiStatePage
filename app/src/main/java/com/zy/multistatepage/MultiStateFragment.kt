@@ -1,8 +1,15 @@
 package com.zy.multistatepage
 
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import com.zy.multistatepage.base.BaseFragment
-import com.zy.multistatepage.base.mock
+import com.zy.multistatepage.base.mockError
+import com.zy.multistatepage.base.mockRandom
+import com.zy.multistatepage.base.mockSuccess
 import com.zy.multistatepage.databinding.FragmentMultiStateBinding
+import com.zy.multistatepage.state.LoadingState
 
 /**
  * @ProjectName: MultiStatePage
@@ -12,13 +19,26 @@ import com.zy.multistatepage.databinding.FragmentMultiStateBinding
  * @CreateDate: 2020/9/17 14:38
  */
 class MultiStateFragment : BaseFragment<FragmentMultiStateBinding>() {
+    private lateinit var multiState: MultiStateContainer
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val root = super.onCreateView(inflater, container, savedInstanceState)
+        multiState = root!!.multiState {
+            mockSuccess(multiState)
+        }
+        multiState.show<LoadingState>()
+        return multiState
+    }
+
     override fun initPage() {
-        val multiState = MultiStatePage.multiState(viewBinding.fl1)
-        mock(multiState)
+        mockError(multiState)
     }
 
     companion object {
-        fun newInstance(): MultiStateFragment{
+        fun newInstance(): MultiStateFragment {
             return MultiStateFragment()
         }
     }

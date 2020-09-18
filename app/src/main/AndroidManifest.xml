@@ -12,9 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".WithViewModelActivity"></activity>
-        <activity android:name=".RecyclerViewActivity" />
-        <activity android:name=".GlobalMultiActivity" />
+        <activity android:name=".MultiViewActivity" />
         <activity android:name=".MockNetActivity" />
         <activity android:name=".LottieExtActivity" />
         <activity android:name=".ViewPager2Activity" />

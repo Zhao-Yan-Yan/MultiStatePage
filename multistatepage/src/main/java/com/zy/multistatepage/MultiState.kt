@@ -17,4 +17,8 @@ abstract class MultiState {
 
     abstract fun enableReload(): Boolean
 
+    open fun onDestroy(){
+
+    }
+
 }

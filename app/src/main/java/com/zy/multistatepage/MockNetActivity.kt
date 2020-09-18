@@ -2,6 +2,7 @@ package com.zy.multistatepage
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.lifecycleScope
 import com.zy.multistatepage.base.BaseActivity
 import com.zy.multistatepage.databinding.ActivityMockNetBinding
 import com.zy.multistatepage.state.ErrorState
@@ -16,18 +17,17 @@ import okhttp3.Request
 import java.lang.Exception
 
 class MockNetActivity : BaseActivity<ActivityMockNetBinding>() {
-    lateinit var multiState: MultiStateContainer
+    private lateinit var multiState: MultiStateContainer
     override fun initPage() {
         MultiStatePage.register(LottieWaitingState())
         multiState = viewBinding.content.multiState {
             loadData()
         }
-
         loadData()
     }
 
     private fun loadData() {
-        MainScope().launch {
+        lifecycleScope.launchWhenCreated {
             try {
                 multiState.show<LottieWaitingState>()
                 val request =

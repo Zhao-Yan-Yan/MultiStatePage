@@ -15,5 +15,6 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         MultiStatePage.register(LottieOtherState())
+            .registerDefault()
     }
 }

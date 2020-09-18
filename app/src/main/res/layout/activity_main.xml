@@ -11,21 +11,21 @@
         android:id="@+id/btn_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Activity中使用"
-        android:textAllCaps="false" />
-
-    <Button
-        android:id="@+id/btn_global_activity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Activity root"
+        android:text="Activity"
         android:textAllCaps="false" />
 
     <Button
         android:id="@+id/btn_fragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Fragment中使用"
+        android:text="Fragment"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="View"
         android:textAllCaps="false" />
 
     <Button
@@ -34,13 +34,6 @@
         android:layout_height="wrap_content"
         android:text="ViewPager2中使用"
         android:textAllCaps="false" />
-
-    <!--    <Button
-            android:id="@+id/btn_recycle_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="RecycleView中使用(异常)"
-            android:textAllCaps="false" />-->
 
     <Button
         android:id="@+id/btn_lottie"
@@ -59,6 +52,6 @@
         android:id="@+id/btn_view_model"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="结合ViewModel Retrofit 协程 实现网络请求"
+        android:text="结合ViewModel Retrofit 协程 实现网络请求\n(敬请期待后续WanAnadroid项目)"
         android:textAllCaps="false" />
 </LinearLayout>

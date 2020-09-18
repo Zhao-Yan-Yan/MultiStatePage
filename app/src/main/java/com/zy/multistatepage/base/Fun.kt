@@ -3,6 +3,8 @@ package com.zy.multistatepage.base
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.zy.multistatepage.MultiStateContainer
 import com.zy.multistatepage.state.EmptyState
 import com.zy.multistatepage.state.ErrorState
@@ -19,16 +21,43 @@ import kotlinx.coroutines.launch
  * @Description: TODO
  * @CreateDate: 2020/9/17 15:04
  */
-fun mock(multiStateContainer: MultiStateContainer, callBack: () -> Unit = {}) {
+fun mockRandom(multiStateContainer: MultiStateContainer) {
     MainScope().launch {
-        multiStateContainer.showLoading()
+        multiStateContainer.show<LoadingState>()
         val delayTime = (10..30).random() * 100.toLong()
         delay(delayTime)
         when ((1..3).random()) {
-            1 -> multiStateContainer.showSuccess(callBack)
-            2 -> multiStateContainer.showEmpty(callBack)
-            3 -> multiStateContainer.showError(callBack)
+            1 -> multiStateContainer.show<SuccessState>()
+            2 -> multiStateContainer.show<EmptyState>()
+            3 -> multiStateContainer.show<ErrorState>()
         }
+    }
+}
+
+fun mockError(multiStateContainer: MultiStateContainer) {
+    MainScope().launch {
+        multiStateContainer.show<LoadingState>()
+        val delayTime = (10..30).random() * 100.toLong()
+        delay(delayTime)
+        multiStateContainer.show<ErrorState>()
+    }
+}
+
+fun mockSuccess(multiStateContainer: MultiStateContainer) {
+    MainScope().launch {
+        multiStateContainer.show<LoadingState>()
+        val delayTime = (10..30).random() * 100.toLong()
+        delay(delayTime)
+        multiStateContainer.show<SuccessState>()
+    }
+}
+
+fun mockEmpty(multiStateContainer: MultiStateContainer) {
+    MainScope().launch {
+        multiStateContainer.show<LoadingState>()
+        val delayTime = (10..30).random() * 100.toLong()
+        delay(delayTime)
+        multiStateContainer.show<EmptyState>()
     }
 }
 
