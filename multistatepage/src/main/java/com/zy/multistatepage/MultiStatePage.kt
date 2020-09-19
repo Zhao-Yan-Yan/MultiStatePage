@@ -20,6 +20,15 @@ import com.zy.multistatepage.state.SuccessState
 object MultiStatePage {
     private var statePoll: MutableMap<Class<out MultiState>, MultiState> = mutableMapOf()
 
+
+    init {
+        register(SuccessState())
+        register(EmptyState())
+        register(ErrorState())
+        register(LoadingState())
+    }
+
+    @JvmStatic
     fun register(multiState: MultiState): MultiStatePage {
         if (!statePoll.containsKey(multiState::class.java)) {
             statePoll[multiState::class.java] = multiState
@@ -27,19 +36,14 @@ object MultiStatePage {
         return this
     }
 
-    fun registerDefault() {
-        register(SuccessState())
-        register(EmptyState())
-        register(ErrorState())
-        register(LoadingState())
-    }
-
+    @JvmStatic
     fun unRegister(multiState: MultiState) {
         if (statePoll.containsKey(multiState::class.java)) {
             statePoll.remove(multiState::class.java)
         }
     }
 
+    @JvmStatic
     fun getDefault(): MutableMap<Class<out MultiState>, MultiState> = statePoll
 
     /**
@@ -48,6 +52,7 @@ object MultiStatePage {
      * 2.将MultiStateContainer添加到原view的索引处
      * 3.MultiStateContainer 的 layoutParams 是原目标View的 layoutParams
      */
+    @JvmStatic
     fun multiState(
         targetView: View,
         retryListener: (multiStateContainer: MultiStateContainer) -> Unit = {}
@@ -78,6 +83,7 @@ object MultiStatePage {
      * 2. 在这个view中移除原本要添加的contentView
      * 3. 将MultiStateContainer设置为 content的子View  MultiStateContainer中持有原有的Activity setContentView
      */
+    @JvmStatic
     fun multiStateActivity(
         activity: Activity,
         retryListener: (multiStateContainer: MultiStateContainer) -> Unit = {}
@@ -91,5 +97,10 @@ object MultiStatePage {
         targetView.addView(multiStateContainer, targetViewIndex, oldLayoutParams)
         multiStateContainer.show<SuccessState>()
         return multiStateContainer
+    }
+
+    @JvmStatic
+    fun config(config: Config): MultiStatePage {
+        return this
     }
 }

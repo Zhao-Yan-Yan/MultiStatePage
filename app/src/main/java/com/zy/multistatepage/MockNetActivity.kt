@@ -41,7 +41,7 @@ class MockNetActivity : BaseActivity<ActivityMockNetBinding>() {
                 e.printStackTrace()
                 multiState.show<ErrorState> {
                     //可以直接设置 state 中的变量 刷新state
-                    it.errorMsg = e.message.toString()
+                    it.setErrorMsg(e.message.toString())
                 }
             }
         }

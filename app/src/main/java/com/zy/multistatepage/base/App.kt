@@ -1,6 +1,7 @@
 package com.zy.multistatepage.base
 
 import android.app.Application
+import com.zy.multistatepage.Config
 import com.zy.multistatepage.MultiStatePage
 import com.zy.multistatepage.state.LottieOtherState
 
@@ -14,7 +15,8 @@ import com.zy.multistatepage.state.LottieOtherState
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
-        MultiStatePage.register(LottieOtherState())
+        MultiStatePage
+            .register(LottieOtherState())
             .registerDefault()
     }
 }

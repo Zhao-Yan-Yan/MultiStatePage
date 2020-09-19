@@ -8,14 +8,15 @@ import com.zy.multistatepage.state.LoadingState
 import kotlinx.coroutines.delay
 
 class RefreshStateActivity : BaseActivity<ActivityRefreshStateBinding>() {
-    var count = 0
+    private var count = 0
     override fun initPage() {
         val multiStateActivityRoot = multiStateActivityRoot() {
             lifecycleScope.launchWhenCreated {
                 it.show<LoadingState>()
                 delay(2000)
                 it.show<ErrorState> {
-                    it.errorMsg = "鸡你太美 ${++count}"
+                    it.setErrorMsg("鸡你太美 ${++count}")
+                    it.setErrorIcon(R.mipmap.jntm)
                 }
 
             }

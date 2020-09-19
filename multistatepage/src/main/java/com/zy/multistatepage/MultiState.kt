@@ -1,6 +1,7 @@
 package com.zy.multistatepage
 
 import android.content.Context
+import android.view.LayoutInflater
 import android.view.View
 
 /**
@@ -11,14 +12,10 @@ import android.view.View
  * @CreateDate: 2020/9/17 12:01
  */
 abstract class MultiState {
-    abstract fun layoutId(): Int
+    abstract fun onCreateMultiStateView(context: Context, inflater: LayoutInflater,container: MultiStateContainer): View
 
-    abstract fun onMultiStateCreate(view: View)
+    abstract fun onMultiStateViewCreate(view: View)
 
     abstract fun enableReload(): Boolean
-
-    open fun reset(){
-
-    }
 
 }

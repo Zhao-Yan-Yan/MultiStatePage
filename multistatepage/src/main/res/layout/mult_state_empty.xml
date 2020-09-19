@@ -12,7 +12,7 @@
         android:id="@+id/img_empty"
         android:layout_width="wrap_content"
         android:layout_height="120dp"
-        android:src="@mipmap/state_null" />
+        android:src="@mipmap/state_empty" />
 
     <TextView
         android:id="@+id/tv_empty_msg"

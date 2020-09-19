@@ -1,7 +1,11 @@
 package com.zy.multistatepage.state
 
+import android.content.Context
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.TextView
 import com.zy.multistatepage.MultiState
+import com.zy.multistatepage.MultiStateContainer
 import com.zy.multistatepage.R
 
 /**
@@ -12,14 +16,22 @@ import com.zy.multistatepage.R
  * @CreateDate: 2020/9/17 14:15
  */
 class LoadingState : MultiState() {
-    override fun layoutId(): Int = R.layout.mult_state_loading
+    lateinit var tvLoadingMsg: TextView
+    override fun onCreateMultiStateView(
+        context: Context,
+        inflater: LayoutInflater,
+        container: MultiStateContainer
+    ): View {
+        return inflater.inflate(R.layout.mult_state_loading, container, false)
+    }
 
-    override fun onMultiStateCreate(view: View) {
+    override fun onMultiStateViewCreate(view: View) {
+        tvLoadingMsg = view.findViewById(R.id.tv_loading_msg)
     }
 
     override fun enableReload(): Boolean = false
 
-    fun setLoadingMsg(){
-
+    fun setLoadingMsg(loadingMsg: String) {
+        tvLoadingMsg.text = loadingMsg
     }
 }

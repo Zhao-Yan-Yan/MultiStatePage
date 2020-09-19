@@ -3,6 +3,7 @@ package com.zy.multistatepage
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Context
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -26,10 +27,9 @@ class MultiStateContainer(
         duration = 500
     }
 
-    inline fun <reified T : MultiState> show(notify: (T) -> Unit = {}) {
-        MultiStatePage.getDefault()[T::class.java]?.let { multiState ->
+    fun <T : MultiState> show(clazz: Class<T>, notify: (T) -> Unit = {}) {
+        MultiStatePage.getDefault()[clazz]?.let { multiState ->
             removeAllViews()
-            multiState.reset()
             if (multiState is SuccessState) {
                 addView(originTargetView)
                 originTargetView.doAnimator()
@@ -38,8 +38,10 @@ class MultiStateContainer(
                     targetViewLayoutParams.setMargins(0, 0, 0, 0)
                     originTargetView.layoutParams = targetViewLayoutParams
                 }
-            } else if (multiState.layoutId() != 0) {
-                val view = View.inflate(context, multiState.layoutId(), null)
+            } else {
+                val view =
+                    multiState.onCreateMultiStateView(context, LayoutInflater.from(context), this)
+                multiState.onMultiStateViewCreate(view)
                 if (multiState.enableReload()) {
                     view.setOnClickListener {
                         retryListener.invoke(this)
@@ -48,9 +50,12 @@ class MultiStateContainer(
                 addView(view)
                 view.doAnimator()
                 notify.invoke(multiState as T)
-                multiState.onMultiStateCreate(view)
             }
         }
+    }
+
+    inline fun <reified T : MultiState> show(noinline notify: (T) -> Unit = {}) {
+        show(T::class.java, notify)
     }
 
     fun View.doAnimator() {
