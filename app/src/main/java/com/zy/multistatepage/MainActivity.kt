@@ -26,6 +26,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         viewBinding.btnLottie.setOnClickListener {
             startActivity<LottieExtActivity>()
         }
+        viewBinding.btnApi.setOnClickListener {
+            startActivity<ApiActivity>()
+        }
         //State 刷新
         viewBinding.btnRefresh.setOnClickListener {
             startActivity<RefreshStateActivity>()

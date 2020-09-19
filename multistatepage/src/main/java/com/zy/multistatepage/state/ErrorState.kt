@@ -26,4 +26,12 @@ class ErrorState : MultiState() {
         super.reset()
         errorMsg = "出错了"
     }
+
+    fun setErrorMsg(){
+
+    }
+
+    fun setErrorIcon(){
+
+    }
 }

@@ -18,4 +18,8 @@ class LoadingState : MultiState() {
     }
 
     override fun enableReload(): Boolean = false
+
+    fun setLoadingMsg(){
+
+    }
 }

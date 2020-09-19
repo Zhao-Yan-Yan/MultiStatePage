@@ -18,4 +18,12 @@ class EmptyState : MultiState() {
     override fun onMultiStateCreate(view: View) = Unit
 
     override fun enableReload(): Boolean = false
+
+    fun setEmptyMsg(){
+
+    }
+
+    fun setEmptyIcon(){
+
+    }
 }
