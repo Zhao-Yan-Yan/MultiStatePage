@@ -44,29 +44,7 @@ dependencies {
 }
 ```
 
-### 1.初始化MultiStatePage
-
-**添加自定义State(可选) Application**
-```kotlin
-class App : Application() {
-    override fun onCreate() {
-        super.onCreate()
-        MultiStatePage
-            .register(CustomState())
-            .register(OtherState())
-    }
-}
-```
-**AndroidManifest.xml 引用**
-```xml
-<manifest>
-    <application 
-        android:name=".App">
-    </application>
-</manifest>
-```
-
-### 2.生成MultiStateContainer
+### 1.生成MultiStateContainer
 
 #### 在View上使用
 基础用法
@@ -116,7 +94,7 @@ class MultiStateFragment : BaseFragment<FragmentMultiStateBinding>() {
 }
 ```
 
-### 3.切换状态
+### 2.切换状态
 调用  `MultiStateContainer.show<T>()` 方法
 
 **默认内置3种状态**
@@ -178,6 +156,15 @@ class LottieExtActivity : AppCompatActivity() {
         MultiStatePage.register(LottieWaitingState())
         val multiStateContainer = multiStateActivityRoot()
         multiStateContainer.show<LottieWaitingState>()
+    }
+}
+```
+也可以在Application中注册(建议)
+```kotlin
+class App : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        MultiStatePage.register(CustomState(), OtherState())
     }
 }
 ```
