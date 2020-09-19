@@ -40,10 +40,10 @@ allprojects {
 Add the dependency
 ```
 dependencies {
-    implementation 'com.github.Zhao-Yan-Yan:MultiStatePage:Tag'
+    implementation 'com.github.Zhao-Yan-Yan:MultiStatePage:$LastVersion'
 }
 ```
-
+LastVersion [![](https://jitpack.io/v/Zhao-Yan-Yan/MultiStatePage.svg)](https://jitpack.io/#Zhao-Yan-Yan/MultiStatePage)
 ### 1.生成MultiStateContainer
 
 #### 在View上使用
