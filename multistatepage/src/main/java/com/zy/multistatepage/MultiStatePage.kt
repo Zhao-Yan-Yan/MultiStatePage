@@ -29,9 +29,11 @@ object MultiStatePage {
     }
 
     @JvmStatic
-    fun register(multiState: MultiState): MultiStatePage {
-        if (!statePoll.containsKey(multiState::class.java)) {
-            statePoll[multiState::class.java] = multiState
+    fun register(vararg multiState: MultiState): MultiStatePage {
+        multiState.forEach {
+            if (!statePoll.containsKey(it::class.java)) {
+                statePoll[it::class.java] = it
+            }
         }
         return this
     }
