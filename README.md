@@ -1,10 +1,11 @@
 # MultiStatePage
 [![](https://jitpack.io/v/Zhao-Yan-Yan/MultiStatePage.svg)](https://jitpack.io/#Zhao-Yan-Yan/MultiStatePage)
 
-- 
-## 使用场景
-- 
 ## 下载Demo
+
+点击或者扫描二维码下载
+
+[![QR code](https://www.pgyer.com/app/qrcode/1uvC)](https://https://www.pgyer.com/1uvC)
 
 | Activity | Fragment | View | ViewPager2 |
 | :-----: | :----: | :----: | :----: |
@@ -15,9 +16,15 @@
 | ![](imgs/lottie.gif) | ![](imgs/state_call.gif) | ![](imgs/net.gif) | ![](imgs/api.gif) |
 
 ## MultiStatePage的功能及特点
-- 
-- 
-- 
+- 无需在布局添加视图代码
+- 可显示自定义状态视图,任意拓展
+- 可用于 Activity、Fragment、或指定的 View
+- 自定义重新请求监听
+- 可动态更新视图样式
+- 可结合第三方控件使用
+- 支持状态回调监听
+- kotlin开发更易用的API
+
 ## 开始
 
 ### 添加依赖
@@ -145,17 +152,21 @@ val multiStateContainer = MultiStatePage.multiState(view){
 #### 1.继承`MultiState`
 ```kotlin
 class LottieWaitingState : MultiState() {
-    //State布局
-    override fun layoutId(): Int = R.layout.multi_lottie_waiting
+    override fun onCreateMultiStateView(
+        context: Context,
+        inflater: LayoutInflater,
+        container: MultiStateContainer
+    ): View {
+        return inflater.inflate(R.layout.multi_lottie_waiting, container, false)
+    }
 
-    override fun onMultiStateCreate(view: View) {
-        //自定义逻辑处理
+    override fun onMultiStateViewCreate(view: View) {
+        //逻辑处理
     }
 
     override fun enableReload(): Boolean = false
 }
 ```
-
 `enableReload()` 是否允许`retry`回调 `false`不允许
 
 #### 2.使用前需register
