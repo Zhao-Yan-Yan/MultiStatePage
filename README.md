@@ -5,7 +5,15 @@
 ## 使用场景
 - 
 ## 下载Demo
-- 
+
+| Activity | Fragment | View | ViewPager2 |
+| :-----: | :----: | :----: | :----: |
+| ![](imgs/activity.gif) | ![](imgs/fragment.gif) | ![](imgs/view.gif) | ![](imgs/viewpager2.gif) |
+
+| Lottie拓展（自定义State） | State刷新 | 网络请求 | mock |
+| :-----: | :----: | :----: | :-----: |
+| ![](imgs/lottie.gif) | ![](imgs/state_call.gif) | ![](imgs/net.gif) | ![](imgs/api.gif) |
+
 ## MultiStatePage的功能及特点
 - 
 - 
@@ -31,25 +39,19 @@ dependencies {
 
 ### 1.初始化MultiStatePage
 
-**Application**
+**添加自定义State(可选) Application**
 ```kotlin
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
-        MultiStatePage.registerDefault()
+        MultiStatePage
+            .register(CustomState())
+            .register(OtherState())
     }
 }
 ```
-**添加自定义State**
-```kotlin
-MultiStatePage
-    .register(CustomState())
-    .register(OtherState())
-    ...
-    .registerDefault()
-```
 **AndroidManifest.xml 引用**
-```
+```xml
 <manifest>
     <application 
         android:name=".App">
