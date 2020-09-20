@@ -203,6 +203,10 @@ fun MultiStateContainer.showLoading(callBack: (LoadingState) -> Unit = {}) {
 val multiStateContainer = multiStateActivityRoot()
 multiStateContainer.showLoading()
 ```
+
+## Thanks
+- [DylanCaiCoding/LoadingHelper](https://github.com/DylanCaiCoding/LoadingHelper/) 
+- [KingJA/LoadSir](https://github.com/KingJA/LoadSir)
 ## License
 ```
 Copyright (C) 2020. ZhaoYan
