@@ -208,6 +208,8 @@ multiStateContainer.showLoading()
 - [DylanCaiCoding/LoadingHelper](https://github.com/DylanCaiCoding/LoadingHelper/) 
 - [KingJA/LoadSir](https://github.com/KingJA/LoadSir)
 - [airbnb/lottie-android](https://github.com/airbnb/lottie-android)
+- [lottie动画资源社区](https://lottiefiles.com/featured)
+
 ## License
 ```
 Copyright (C) 2020. ZhaoYan
