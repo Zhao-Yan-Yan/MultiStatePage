@@ -5,7 +5,7 @@
 
 点击或者扫描二维码下载
 
-[![QR code](imgs/QRCode)](https://www.pgyer.com/1uvC)
+[![QR code](imgs/QRCode.png)](https://www.pgyer.com/1uvC)
 
 | Activity | Fragment | View | ViewPager2 |
 | :-----: | :----: | :----: | :----: |
