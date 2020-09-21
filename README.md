@@ -210,6 +210,8 @@ multiStateContainer.showLoading()
 - [airbnb/lottie-android](https://github.com/airbnb/lottie-android)
 - [lottie动画资源社区](https://lottiefiles.com/featured)
 
+**如果对你有帮助的话可以点个star支持一下子 谢谢亲**
+
 ## License
 ```
 Copyright (C) 2020. ZhaoYan
