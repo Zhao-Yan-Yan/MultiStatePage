@@ -1,23 +1,30 @@
 # MultiStatePage
 [![](https://jitpack.io/v/Zhao-Yan-Yan/MultiStatePage.svg)](https://jitpack.io/#Zhao-Yan-Yan/MultiStatePage)
-
-- 
-## 使用场景
-- 
+[![License](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](https://github.com/Zhao-Yan-Yan/MultiStatePage/blob/master/LICENSE) 
 ## 下载Demo
 
-| Activity | Fragment | View | ViewPager2 |
+点击或者扫描二维码下载
+
+[![QR code](imgs/QRCode.png)](https://www.pgyer.com/1uvC)
+
+| [Activity](app/src/main/java/com/zy/multistatepage/MultiStateActivity.kt) | [Fragment](app/src/main/java/com/zy/multistatepage/MultiFragmentActivity.kt) | [View](app/src/main/java/com/zy/multistatepage/MultiViewActivity.kt) | [ViewPager2](app/src/main/java/com/zy/multistatepage/ViewPager2Activity.kt) |
 | :-----: | :----: | :----: | :----: |
 | ![](imgs/activity.gif) | ![](imgs/fragment.gif) | ![](imgs/view.gif) | ![](imgs/viewpager2.gif) |
 
-| Lottie拓展（自定义State） | State刷新 | 网络请求 | mock |
+| [Lottie拓展（自定义State）](app/src/main/java/com/zy/multistatepage/LottieExtActivity.kt) | [State刷新](app/src/main/java/com/zy/multistatepage/RefreshStateActivity.kt) | [网络请求](app/src/main/java/com/zy/multistatepage/MockNetActivity.kt) | [mock](app/src/main/java/com/zy/multistatepage/ApiActivity.kt) |
 | :-----: | :----: | :----: | :-----: |
 | ![](imgs/lottie.gif) | ![](imgs/state_call.gif) | ![](imgs/net.gif) | ![](imgs/api.gif) |
 
 ## MultiStatePage的功能及特点
-- 
-- 
-- 
+- 无需在布局添加视图代码
+- 可显示自定义状态视图,任意拓展
+- 可用于 Activity、Fragment、或指定的 View
+- 自定义重新请求监听
+- 可动态更新视图样式
+- 可结合第三方控件使用
+- 支持状态回调监听
+- kotlin开发更易用的API
+
 ## 开始
 
 ### 添加依赖
@@ -33,33 +40,11 @@ allprojects {
 Add the dependency
 ```
 dependencies {
-    implementation 'com.github.Zhao-Yan-Yan:MultiStatePage:Tag'
+    implementation 'com.github.Zhao-Yan-Yan:MultiStatePage:$LastVersion'
 }
 ```
-
-### 1.初始化MultiStatePage
-
-**添加自定义State(可选) Application**
-```kotlin
-class App : Application() {
-    override fun onCreate() {
-        super.onCreate()
-        MultiStatePage
-            .register(CustomState())
-            .register(OtherState())
-    }
-}
-```
-**AndroidManifest.xml 引用**
-```xml
-<manifest>
-    <application 
-        android:name=".App">
-    </application>
-</manifest>
-```
-
-### 2.生成MultiStateContainer
+LastVersion [![](https://jitpack.io/v/Zhao-Yan-Yan/MultiStatePage.svg)](https://jitpack.io/#Zhao-Yan-Yan/MultiStatePage)
+### 1.生成MultiStateContainer
 
 #### 在View上使用
 基础用法
@@ -109,7 +94,7 @@ class MultiStateFragment : BaseFragment<FragmentMultiStateBinding>() {
 }
 ```
 
-### 3.切换状态
+### 2.切换状态
 调用  `MultiStateContainer.show<T>()` 方法
 
 **默认内置3种状态**
@@ -145,17 +130,21 @@ val multiStateContainer = MultiStatePage.multiState(view){
 #### 1.继承`MultiState`
 ```kotlin
 class LottieWaitingState : MultiState() {
-    //State布局
-    override fun layoutId(): Int = R.layout.multi_lottie_waiting
+    override fun onCreateMultiStateView(
+        context: Context,
+        inflater: LayoutInflater,
+        container: MultiStateContainer
+    ): View {
+        return inflater.inflate(R.layout.multi_lottie_waiting, container, false)
+    }
 
-    override fun onMultiStateCreate(view: View) {
-        //自定义逻辑处理
+    override fun onMultiStateViewCreate(view: View) {
+        //逻辑处理
     }
 
     override fun enableReload(): Boolean = false
 }
 ```
-
 `enableReload()` 是否允许`retry`回调 `false`不允许
 
 #### 2.使用前需register
@@ -167,6 +156,15 @@ class LottieExtActivity : AppCompatActivity() {
         MultiStatePage.register(LottieWaitingState())
         val multiStateContainer = multiStateActivityRoot()
         multiStateContainer.show<LottieWaitingState>()
+    }
+}
+```
+也可以在Application中注册(建议)
+```kotlin
+class App : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        MultiStatePage.register(CustomState(), OtherState())
     }
 }
 ```
@@ -204,4 +202,29 @@ fun MultiStateContainer.showLoading(callBack: (LoadingState) -> Unit = {}) {
 ```kotlin
 val multiStateContainer = multiStateActivityRoot()
 multiStateContainer.showLoading()
+```
+
+## Thanks
+- [DylanCaiCoding/LoadingHelper](https://github.com/DylanCaiCoding/LoadingHelper/) 
+- [KingJA/LoadSir](https://github.com/KingJA/LoadSir)
+- [airbnb/lottie-android](https://github.com/airbnb/lottie-android)
+- [lottie动画资源社区](https://lottiefiles.com/featured)
+
+**如果对你有帮助的话可以点个star支持一下子 谢谢亲**
+
+## License
+```
+Copyright (C) 2020. ZhaoYan
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 ```
