@@ -3,8 +3,6 @@ package com.zy.multistatepage.base;
 import android.app.Application;
 import android.view.View;
 
-import com.zy.multistatepage.Config;
-import com.zy.multistatepage.MultiState;
 import com.zy.multistatepage.MultiStateContainer;
 import com.zy.multistatepage.MultiStatePage;
 import com.zy.multistatepage.state.LottieOtherState;
@@ -23,8 +21,15 @@ class Test extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Config config = new Config();
-        MultiStatePage.config(config);
+       /* new Config.Builder()
+                .alphaDuration()
+                .emptyIcon()
+                .emptyMsg()
+                .errorIcon()
+                .errorMsg()
+                .loadingMsg()
+                .build();
+        MultiStatePage.config(config);*/
 
         View view = new View(this);
 

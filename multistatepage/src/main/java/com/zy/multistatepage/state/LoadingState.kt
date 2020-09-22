@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.TextView
 import com.zy.multistatepage.MultiState
 import com.zy.multistatepage.MultiStateContainer
+import com.zy.multistatepage.MultiStatePage
 import com.zy.multistatepage.R
 
 /**
@@ -27,6 +28,7 @@ class LoadingState : MultiState() {
 
     override fun onMultiStateViewCreate(view: View) {
         tvLoadingMsg = view.findViewById(R.id.tv_loading_msg)
+        setLoadingMsg(MultiStatePage.config.loadingMsg)
     }
 
     override fun enableReload(): Boolean = false

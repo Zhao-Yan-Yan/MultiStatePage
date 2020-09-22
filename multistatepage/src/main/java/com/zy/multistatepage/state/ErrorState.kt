@@ -9,6 +9,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.IdRes
 import com.zy.multistatepage.MultiState
 import com.zy.multistatepage.MultiStateContainer
+import com.zy.multistatepage.MultiStatePage
 import com.zy.multistatepage.R
 
 /**
@@ -34,6 +35,9 @@ class ErrorState : MultiState() {
     override fun onMultiStateViewCreate(view: View) {
         tvErrorMsg = view.findViewById(R.id.tv_error_msg)
         imgError = view.findViewById(R.id.img_error)
+
+        setErrorMsg(MultiStatePage.config.errorMsg)
+        setErrorIcon(MultiStatePage.config.errorIcon)
     }
 
     override fun enableReload(): Boolean = true

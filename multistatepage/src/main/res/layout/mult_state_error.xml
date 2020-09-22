@@ -20,9 +20,8 @@
         android:layout_marginTop="5dp"
         android:gravity="center"
         android:maxEms="15"
-        android:text="空数据"
-        android:textColor="@android:color/darker_gray"
-        tools:text="信息" />
+        android:text="出错了"
+        android:textColor="@android:color/darker_gray" />
 
     <TextView
         android:id="@+id/tv_retry"

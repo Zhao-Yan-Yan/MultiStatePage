@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.annotation.DrawableRes
 import com.zy.multistatepage.MultiState
 import com.zy.multistatepage.MultiStateContainer
+import com.zy.multistatepage.MultiStatePage
 import com.zy.multistatepage.R
 
 /**
@@ -34,15 +35,17 @@ class EmptyState : MultiState() {
         tvEmptyMsg = view.findViewById(R.id.tv_empty_msg)
         imgEmpty = view.findViewById(R.id.img_empty)
 
+        setEmptyMsg(MultiStatePage.config.emptyMsg)
+        setEmptyIcon(MultiStatePage.config.emptyIcon)
     }
 
     override fun enableReload(): Boolean = false
 
-    fun setEmptyMsg(emptyMsg:String){
+    fun setEmptyMsg(emptyMsg: String) {
         tvEmptyMsg.text = emptyMsg
     }
 
-    fun setEmptyIcon(@DrawableRes emptyIcon:Int){
+    fun setEmptyIcon(@DrawableRes emptyIcon: Int) {
         imgEmpty.setImageResource(emptyIcon)
     }
 }

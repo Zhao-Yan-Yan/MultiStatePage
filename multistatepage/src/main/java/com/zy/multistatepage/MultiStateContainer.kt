@@ -19,12 +19,12 @@ import com.zy.multistatepage.state.SuccessState
 @SuppressLint("ViewConstructor")
 class MultiStateContainer(
     context: Context,
-    val originTargetView: View,
-    val retryListener: (multiStateContainer: MultiStateContainer) -> Unit
+    private val originTargetView: View,
+    private val retryListener: (multiStateContainer: MultiStateContainer) -> Unit
 ) : FrameLayout(context) {
 
-    var animator = ValueAnimator.ofFloat(0.0f, 1.0f).apply {
-        duration = 500
+    private var animator = ValueAnimator.ofFloat(0.0f, 1.0f).apply {
+        duration = MultiStatePage.config.alphaDuration
     }
 
     fun <T : MultiState> show(clazz: Class<T>, notify: (T) -> Unit = {}) {
@@ -34,13 +34,12 @@ class MultiStateContainer(
                 addView(originTargetView)
                 originTargetView.doAnimator()
                 val targetViewLayoutParams = originTargetView.layoutParams
-                if (targetViewLayoutParams is ViewGroup.MarginLayoutParams) {
+                if (targetViewLayoutParams is MarginLayoutParams) {
                     targetViewLayoutParams.setMargins(0, 0, 0, 0)
                     originTargetView.layoutParams = targetViewLayoutParams
                 }
             } else {
-                val view =
-                    multiState.onCreateMultiStateView(context, LayoutInflater.from(context), this)
+                val view = multiState.onCreateMultiStateView(context, LayoutInflater.from(context), this)
                 multiState.onMultiStateViewCreate(view)
                 if (multiState.enableReload()) {
                     view.setOnClickListener {

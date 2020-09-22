@@ -3,8 +3,6 @@ package com.zy.multistatepage
 import android.app.Activity
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RelativeLayout
-import androidx.core.view.marginBottom
 import com.zy.multistatepage.state.EmptyState
 import com.zy.multistatepage.state.ErrorState
 import com.zy.multistatepage.state.LoadingState
@@ -18,6 +16,7 @@ import com.zy.multistatepage.state.SuccessState
  * @CreateDate: 2020/9/17 11:53
  */
 object MultiStatePage {
+
     private var statePoll: MutableMap<Class<out MultiState>, MultiState> = mutableMapOf()
 
 
@@ -101,8 +100,12 @@ object MultiStatePage {
         return multiStateContainer
     }
 
+    var config: MultiStateConfig = MultiStateConfig()
+
     @JvmStatic
-    fun config(config: Config): MultiStatePage {
+    fun config(config: MultiStateConfig): MultiStatePage {
+        this.config = config
         return this
     }
+
 }

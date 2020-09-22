@@ -1,8 +1,9 @@
 package com.zy.multistatepage.base
 
 import android.app.Application
-import com.zy.multistatepage.Config
+import com.zy.multistatepage.MultiStateConfig
 import com.zy.multistatepage.MultiStatePage
+import com.zy.multistatepage.R
 import com.zy.multistatepage.state.LottieOtherState
 
 /**
@@ -16,5 +17,16 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         MultiStatePage.register(LottieOtherState())
+
+        val config = MultiStateConfig.Builder()
+            .alphaDuration(300)
+            .errorIcon(R.mipmap.state_error)
+            .emptyIcon(R.mipmap.state_empty)
+            .emptyMsg("emptyMsg")
+            .loadingMsg("loadingMsg")
+            .errorMsg("errorMsg")
+            .build()
+
+        MultiStatePage.config(config)
     }
 }
