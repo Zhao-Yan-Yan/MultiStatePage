@@ -169,6 +169,35 @@ class App : Application() {
 }
 ```
 
+### 使用内置状态配置
+
+```kotlin
+class App : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        MultiStatePage.register(LottieOtherState())
+
+        val config = MultiStateConfig.Builder()
+            .alphaDuration(300)
+            .errorIcon(R.mipmap.state_error)
+            .emptyIcon(R.mipmap.state_empty)
+            .emptyMsg("emptyMsg")
+            .loadingMsg("loadingMsg")
+            .errorMsg("errorMsg")
+            .build()
+
+        MultiStatePage.config(config)
+    }
+}
+```
+| method | 作用 |
+| :-----: | :----: |
+| `alphaDuration` | alpha动画时长 |
+| `errorIcon` | 错误状态默认图标 |
+| `emptyIcon` | 空数据状态默认图标 |
+| `emptyMsg` | 空数据状态默认提示信息 |
+| `errorMsg` | 错误状态默认提示信息 |
+| `loadingMsg` | loading状态默认提示信息 |
 
 ### 小技巧
 可以借助kotlin的拓展函数封装常用的状态
