@@ -232,7 +232,8 @@ fun MultiStateContainer.showLoading(callBack: (LoadingState) -> Unit = {}) {
 val multiStateContainer = multiStateActivityRoot()
 multiStateContainer.showLoading()
 ```
-
+## 更新日志
+- 1.0.0 支持内置状态页信息配置,支持alpha动画时长配置
 ## Thanks
 - [DylanCaiCoding/LoadingHelper](https://github.com/DylanCaiCoding/LoadingHelper/) 
 - [KingJA/LoadSir](https://github.com/KingJA/LoadSir)
