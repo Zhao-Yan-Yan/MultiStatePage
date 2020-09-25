@@ -28,7 +28,7 @@
 ## 开始
 
 ### 添加依赖
-Add the JitPack repository to your build file
+Step1. Add the JitPack repository to your build file
 ```
 allprojects {
     repositories {
@@ -37,7 +37,7 @@ allprojects {
 }
 ```
 
-Add the dependency
+Step2. Add the dependency
 ```
 dependencies {
     implementation 'com.github.Zhao-Yan-Yan:MultiStatePage:$LastVersion'
