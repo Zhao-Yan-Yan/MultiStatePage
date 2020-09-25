@@ -62,7 +62,7 @@ class MultiStateActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.xxx)
-       val multiStateContainer = MultiStatePage.multiStateActivity(this)
+        val multiStateContainer = MultiStatePage.multiStateActivity(this)
     }
 }
 ```
