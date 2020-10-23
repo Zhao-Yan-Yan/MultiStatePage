@@ -44,7 +44,7 @@ class ErrorState : MultiState() {
 
     override fun enableReload(): Boolean = true
 
-    override fun retryView(): View? {
+    override fun bindRetryView(): View? {
         return tvRetry
     }
 

@@ -5,7 +5,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.zy.multistatepage.state.SuccessState
 
@@ -41,7 +40,7 @@ class MultiStateContainer(
             } else {
                 val view = multiState.onCreateMultiStateView(context, LayoutInflater.from(context), this)
                 multiState.onMultiStateViewCreate(view)
-                val retryView = multiState.retryView()
+                val retryView = multiState.bindRetryView()
                 if (multiState.enableReload()) {
                     if (retryView != null) {
                         retryView.setOnClickListener { retryListener.invoke(this) }
