@@ -243,8 +243,8 @@ val multiStateContainer = multiStateActivityRoot()
 multiStateContainer.showLoading()
 ```
 ## 更新日志
-- 1.0.1(2020/09/22) 支持内置状态页信息配置,支持alpha动画时长配置
 - 1.0.2(2020/10/23) 支持指定重试view , 支持ViewBinding 
+- 1.0.1(2020/09/22) 支持内置状态页信息配置,支持alpha动画时长配置
 
 ## Thanks
 - [DylanCaiCoding/LoadingHelper](https://github.com/DylanCaiCoding/LoadingHelper/) 
