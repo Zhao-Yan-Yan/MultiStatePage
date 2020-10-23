@@ -23,6 +23,7 @@ class ErrorState : MultiState() {
 
     private lateinit var tvErrorMsg: TextView
     private lateinit var imgError: ImageView
+    private lateinit var tvRetry: TextView
 
     override fun onCreateMultiStateView(
         context: Context,
@@ -35,6 +36,7 @@ class ErrorState : MultiState() {
     override fun onMultiStateViewCreate(view: View) {
         tvErrorMsg = view.findViewById(R.id.tv_error_msg)
         imgError = view.findViewById(R.id.img_error)
+        tvRetry = view.findViewById(R.id.tv_retry)
 
         setErrorMsg(MultiStatePage.config.errorMsg)
         setErrorIcon(MultiStatePage.config.errorIcon)
@@ -42,6 +44,9 @@ class ErrorState : MultiState() {
 
     override fun enableReload(): Boolean = true
 
+    override fun retryView(): View? {
+        return tvRetry
+    }
 
     fun setErrorMsg(errorMsg: String) {
         tvErrorMsg.text = errorMsg

@@ -18,4 +18,5 @@ abstract class MultiState {
 
     abstract fun enableReload(): Boolean
 
+    open fun retryView(): View? = null
 }
