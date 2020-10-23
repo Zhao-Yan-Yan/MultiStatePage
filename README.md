@@ -141,12 +141,19 @@ class LottieWaitingState : MultiState() {
     override fun onMultiStateViewCreate(view: View) {
         //逻辑处理
     }
-
+    
+    //是否允许重试
     override fun enableReload(): Boolean = false
+    
+    //指定重试 view
+    override fun bindRetryView(): View? {
+        return retryView
+    }
 }
 ```
 `enableReload()` 是否允许`retry`回调 `false`不允许
 
+`bindRetryView` 绑定重试点击事件的`view` 默认为根`view`
 #### 2.使用前需register
 
 ```kotlin
@@ -234,6 +241,7 @@ multiStateContainer.showLoading()
 ```
 ## 更新日志
 - 1.0.1 支持内置状态页信息配置,支持alpha动画时长配置
+- 1.0.2 支持指定重试view , 支持ViewBinding 
 
 ## Thanks
 - [DylanCaiCoding/LoadingHelper](https://github.com/DylanCaiCoding/LoadingHelper/) 
