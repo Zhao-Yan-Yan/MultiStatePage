@@ -157,24 +157,14 @@ class LottieWaitingState : MultiState() {
 
 结合`ViewBidng` 参考 `demo` [MultiStateBinding](app/src/main/java/com/zy/multistatepage/base/MultiStateBinding.kt) 和 [MultiStateBinding](app/src/main/java/com/zy/multistatepage/state/WithBindingState.kt)
 
-#### 2.使用前需register
+#### 2.show (1.0.3后无需register)
 
 ```kotlin
 class LottieExtActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        MultiStatePage.register(LottieWaitingState())
         val multiStateContainer = multiStateActivityRoot()
         multiStateContainer.show<LottieWaitingState>()
-    }
-}
-```
-也可以在Application中注册(建议)
-```kotlin
-class App : Application() {
-    override fun onCreate() {
-        super.onCreate()
-        MultiStatePage.register(CustomState(), OtherState())
     }
 }
 ```
@@ -185,8 +175,6 @@ class App : Application() {
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
-        MultiStatePage.register(LottieOtherState())
-
         val config = MultiStateConfig.Builder()
             .alphaDuration(300)
             .errorIcon(R.mipmap.state_error)
@@ -195,7 +183,6 @@ class App : Application() {
             .loadingMsg("loadingMsg")
             .errorMsg("errorMsg")
             .build()
-
         MultiStatePage.config(config)
     }
 }
@@ -243,8 +230,9 @@ val multiStateContainer = multiStateActivityRoot()
 multiStateContainer.showLoading()
 ```
 ## 更新日志
-- 1.0.2(2020/10/23) 支持指定重试view , 支持ViewBinding 
-- 1.0.1(2020/09/22) 支持内置状态页信息配置,支持alpha动画时长配置
+- 1.0.3(2020/10/26) 修复state内存泄漏, 移除register函数
+- 1.0.2(2020/10/23) 支持指定重试view, 支持ViewBinding 
+- 1.0.1(2020/09/22) 支持内置状态页信息配置, 支持alpha动画时长配置
 
 ## Thanks
 - [DylanCaiCoding/LoadingHelper](https://github.com/DylanCaiCoding/LoadingHelper/) 
