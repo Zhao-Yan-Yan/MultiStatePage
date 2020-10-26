@@ -3,9 +3,6 @@ package com.zy.multistatepage
 import android.app.Activity
 import android.view.View
 import android.view.ViewGroup
-import com.zy.multistatepage.state.EmptyState
-import com.zy.multistatepage.state.ErrorState
-import com.zy.multistatepage.state.LoadingState
 import com.zy.multistatepage.state.SuccessState
 
 /**
@@ -16,36 +13,6 @@ import com.zy.multistatepage.state.SuccessState
  * @CreateDate: 2020/9/17 11:53
  */
 object MultiStatePage {
-
-    private var statePoll: MutableMap<Class<out MultiState>, MultiState> = mutableMapOf()
-
-
-    init {
-        register(SuccessState())
-        register(EmptyState())
-        register(ErrorState())
-        register(LoadingState())
-    }
-
-    @JvmStatic
-    fun register(vararg multiState: MultiState): MultiStatePage {
-        multiState.forEach {
-            if (!statePoll.containsKey(it::class.java)) {
-                statePoll[it::class.java] = it
-            }
-        }
-        return this
-    }
-
-    @JvmStatic
-    fun unRegister(multiState: MultiState) {
-        if (statePoll.containsKey(multiState::class.java)) {
-            statePoll.remove(multiState::class.java)
-        }
-    }
-
-    @JvmStatic
-    fun getDefault(): MutableMap<Class<out MultiState>, MultiState> = statePoll
 
     /**
      * 实现原理

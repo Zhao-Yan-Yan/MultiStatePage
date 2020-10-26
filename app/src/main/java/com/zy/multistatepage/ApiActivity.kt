@@ -10,9 +10,6 @@ import com.zy.multistatepage.state.*
 class ApiActivity : BaseActivity<ActivityApiBinding>() {
     override fun initPage() {
 
-        MultiStatePage.register(LottieWaitingState())
-            .register(LottieOtherState())
-
         val multiState = viewBinding.fl.multiState()
 
         viewBinding.btnLoading.setOnClickListener {

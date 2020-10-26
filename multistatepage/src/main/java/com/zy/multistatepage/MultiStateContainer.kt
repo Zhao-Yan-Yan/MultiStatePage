@@ -3,6 +3,7 @@ package com.zy.multistatepage
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
@@ -22,12 +23,14 @@ class MultiStateContainer(
     private val retryListener: (multiStateContainer: MultiStateContainer) -> Unit
 ) : FrameLayout(context) {
 
+    private var statePoll: MutableMap<Class<out MultiState>, MultiState> = mutableMapOf()
+
     private var animator = ValueAnimator.ofFloat(0.0f, 1.0f).apply {
         duration = MultiStatePage.config.alphaDuration
     }
 
     fun <T : MultiState> show(clazz: Class<T>, notify: (T) -> Unit = {}) {
-        MultiStatePage.getDefault()[clazz]?.let { multiState ->
+        findState(clazz)?.let { multiState ->
             removeAllViews()
             if (multiState is SuccessState) {
                 addView(originTargetView)
@@ -59,12 +62,21 @@ class MultiStateContainer(
         show(T::class.java, notify)
     }
 
-    fun View.doAnimator() {
+    private fun <T : MultiState> findState(clazz: Class<T>): MultiState? {
+        return if (statePoll.containsKey(clazz)) {
+            statePoll[clazz]
+        } else {
+            val state = clazz.newInstance()
+            statePoll[clazz] = state
+            state
+        }
+    }
+
+    private fun View.doAnimator() {
         this.clearAnimation()
         animator.addUpdateListener {
             this.alpha = it.animatedValue as Float
         }
         animator.start()
     }
-
 }

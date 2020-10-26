@@ -19,7 +19,6 @@ import java.lang.Exception
 class MockNetActivity : BaseActivity<ActivityMockNetBinding>() {
     private lateinit var multiState: MultiStateContainer
     override fun initPage() {
-        MultiStatePage.register(LottieWaitingState())
         multiState = viewBinding.content.multiState {
             loadData()
         }

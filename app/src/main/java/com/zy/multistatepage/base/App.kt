@@ -16,8 +16,6 @@ import com.zy.multistatepage.state.LottieOtherState
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
-        MultiStatePage.register(LottieOtherState())
-
         val config = MultiStateConfig.Builder()
             .alphaDuration(300)
             .errorIcon(R.mipmap.state_error)

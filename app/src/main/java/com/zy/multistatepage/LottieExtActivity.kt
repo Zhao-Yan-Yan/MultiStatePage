@@ -14,7 +14,6 @@ import kotlinx.coroutines.launch
 
 class LottieExtActivity : BaseActivity<ActivityLottieExtBinding>() {
     override fun initPage() {
-        MultiStatePage.register(LottieWaitingState())
         val multiState = MultiStatePage.multiState(viewBinding.fl) {
             mockSuccess(it)
         }
