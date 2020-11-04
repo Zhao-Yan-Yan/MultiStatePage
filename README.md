@@ -47,49 +47,97 @@ dependencies {
 ### 1.生成MultiStateContainer
 
 #### 在View上使用
+##### kotlin
 基础用法
 ```kotlin
 val multiStateContainer = MultiStatePage.bindMultiState(view)
+
+val multiStateContainer = MultiStatePage.bindMultiState(view) { multiStateContainer: MultiStateContainer ->
+    // 重试事件处理
+}
 ```
-`kotlin` 拓展方法
+拓展方法
 ```kotlin
 val multiStateContainer = view.bindMultiState()
+
+val multiStateContainer = view.bindMultiState() { multiStateContainer: MultiStateContainer ->
+    // 重试事件处理
+}
+```
+
+##### java
+```java
+MultiStateContainer multiStateContainer = MultiStatePage.bindMultiState(view)
+
+MultiStateContainer multiStateContainer = MultiStatePage.bindMultiState(view, new OnRetryEventListener() {
+    @Override
+    public void onRetryEvent(MultiStateContainer multiStateContainer) {
+        // 重试事件处理
+    }
+});
 ```
 #### 在Activity 根View中使用
+##### kotlin
 基础用法
 ```kotlin
-class MultiStateActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.xxx)
-        val multiStateContainer = MultiStatePage.bindMultiState(this)
-    }
-}
-```
-`kotlin` 拓展方法
-```kotlin
-class MultiStateActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.xxx)
-        val multiStateContainer = bindMultiState()
-    }
-}
-```
+val multiStateContainer = MultiStatePage.bindMultiState(this)
 
+val multiStateContainer = MultiStatePage.bindMultiState(this) { multiStateContainer: MultiStateContainer ->
+    // 重试事件处理
+}
+```
+拓展方法
+```kotlin
+val multiStateContainer = bindMultiState()
+
+val multiStateContainer = bindMultiState() { multiStateContainer: MultiStateContainer ->
+    // 重试事件处理
+}
+```
+##### java
+```java
+MultiStateContainer multiStateContainer = MultiStatePage.bindMultiState(this);
+
+MultiStateContainer multiStateContainer = MultiStatePage.bindMultiState(this, new OnRetryEventListener() {
+    @Override
+    public void onRetryEvent(MultiStateContainer multiStateContainer) {
+        // 重试事件处理   
+    }
+});
+```
 #### 在Fragment根View中使用
-
+##### kotlin
 ```kotlin
-class MultiStateFragment : BaseFragment<FragmentMultiStateBinding>() {
+class MultiStateFragment : Fragment {
+    
     private lateinit var multiStateContainer: MultiStateContainer
+    
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.activity_api, container, false)
-        multiStateContainer = MultiStatePage.bindMultiState(root)
+        val root = inflater.inflate(R.layout.fragment, container, false)
+        multiStateContainer = MultiStatePage.bindMultiState(root) { multiStateContainer: MultiStateContainer ->
+            // 重试事件处理
+        }
+        //或者
+        multiStateContainer = root.bindMultiState() { multiStateContainer: MultiStateContainer ->
+            // 重试事件处理
+        }
         return multiStateContainer
+    }
+}
+```
+##### java
+```java
+class JavaFragment extends Fragment {
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View root = inflater.inflate(R.layout.activity_main, container, false);
+        MultiStateContainer multiStateContainer = MultiStatePage.bindMultiState(root);
+        return multiStateContainer;
     }
 }
 ```
@@ -226,10 +274,12 @@ fun MultiStateContainer.showLoading(callBack: (LoadingState) -> Unit = {}) {
 
 调用
 ```kotlin
-val multiStateContainer = multiStateActivityRoot()
+val multiStateContainer = bindMultiState()
 multiStateContainer.showLoading()
+multiStateContainer.showSuccess()
 ```
 ## 更新日志
+- 1.0.5(2020/11/04) `kotlin`函数类型参数更换为`java interface`对`java`的调用更友好
 - 1.0.4(2020/11/04) api重命名 `Activity`和`View`统一为`bindMultiState()`
 - 1.0.3(2020/10/26) 修复state内存泄漏, 移除register函数
 - 1.0.2(2020/10/23) 支持指定重试view, 支持ViewBinding 
