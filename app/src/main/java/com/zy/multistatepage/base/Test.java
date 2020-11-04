@@ -33,7 +33,7 @@ class Test extends Application {
 
         View view = new View(this);
 
-        MultiStateContainer multiStateContainer = MultiStatePage.multiState(view, new Function1<MultiStateContainer, Unit>() {
+        MultiStateContainer multiStateContainer = MultiStatePage.bindMultiState(view, new Function1<MultiStateContainer, Unit>() {
             @Override
             public Unit invoke(MultiStateContainer multiStateContainer) {
 

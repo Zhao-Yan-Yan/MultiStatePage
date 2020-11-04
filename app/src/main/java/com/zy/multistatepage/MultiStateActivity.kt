@@ -9,7 +9,7 @@ import com.zy.multistatepage.databinding.ActivityMultiStateBinding
 class MultiStateActivity : BaseActivity<ActivityMultiStateBinding>() {
 
     override fun initPage() {
-        val multiStateActivityRoot = multiStateActivityRoot {
+        val multiStateActivityRoot = bindMultiState {
             mockSuccess(it)
         }
         mockError(multiStateActivityRoot)

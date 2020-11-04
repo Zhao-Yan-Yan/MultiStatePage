@@ -12,7 +12,11 @@ import android.view.View
  * @CreateDate: 2020/9/17 12:01
  */
 abstract class MultiState {
-    abstract fun onCreateMultiStateView(context: Context, inflater: LayoutInflater,container: MultiStateContainer): View
+    abstract fun onCreateMultiStateView(
+        context: Context,
+        inflater: LayoutInflater,
+        container: MultiStateContainer
+    ): View
 
     abstract fun onMultiStateViewCreate(view: View)
 

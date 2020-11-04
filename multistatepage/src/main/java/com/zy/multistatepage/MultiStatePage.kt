@@ -21,7 +21,7 @@ object MultiStatePage {
      * 3.MultiStateContainer 的 layoutParams 是原目标View的 layoutParams
      */
     @JvmStatic
-    fun multiState(
+    fun bindMultiState(
         targetView: View,
         retryListener: (multiStateContainer: MultiStateContainer) -> Unit = {}
     ): MultiStateContainer {
@@ -36,10 +36,7 @@ object MultiStatePage {
                 }
             }
             targetViewParent.removeView(targetView)
-            val targetViewLayoutParams = targetView.layoutParams
-            val temp = targetView.layoutParams
-            targetViewParent.addView(multiStateContainer, targetViewIndex, temp)
-
+            targetViewParent.addView(multiStateContainer, targetViewIndex, targetView.layoutParams)
         }
         multiStateContainer.show<SuccessState>()
         return multiStateContainer
@@ -52,7 +49,7 @@ object MultiStatePage {
      * 3. 将MultiStateContainer设置为 content的子View  MultiStateContainer中持有原有的Activity setContentView
      */
     @JvmStatic
-    fun multiStateActivity(
+    fun bindMultiState(
         activity: Activity,
         retryListener: (multiStateContainer: MultiStateContainer) -> Unit = {}
     ): MultiStateContainer {

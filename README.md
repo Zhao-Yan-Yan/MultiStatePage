@@ -49,11 +49,11 @@ dependencies {
 #### 在View上使用
 基础用法
 ```kotlin
-val multiStateContainer = MultiStatePage.multiState(view)
+val multiStateContainer = MultiStatePage.bindMultiState(view)
 ```
 `kotlin` 拓展方法
 ```kotlin
-val multiStateContainer = view.multiState()
+val multiStateContainer = view.bindMultiState()
 ```
 #### 在Activity 根View中使用
 基础用法
@@ -62,7 +62,7 @@ class MultiStateActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.xxx)
-        val multiStateContainer = MultiStatePage.multiStateActivity(this)
+        val multiStateContainer = MultiStatePage.bindMultiState(this)
     }
 }
 ```
@@ -72,7 +72,7 @@ class MultiStateActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.xxx)
-        val multiStateContainer = multiStateActivityRoot()
+        val multiStateContainer = bindMultiState()
     }
 }
 ```
@@ -88,7 +88,7 @@ class MultiStateFragment : BaseFragment<FragmentMultiStateBinding>() {
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.activity_api, container, false)
-        multiStateContainer = MultiStatePage.multiState(root)
+        multiStateContainer = MultiStatePage.bindMultiState(root)
         return multiStateContainer
     }
 }
@@ -99,7 +99,7 @@ class MultiStateFragment : BaseFragment<FragmentMultiStateBinding>() {
 
 **默认内置3种状态**
 ```kotlin
-val multiStateContainer = MultiStatePage.multiState(view)
+val multiStateContainer = MultiStatePage.bindMultiState(view)
 //成功页 
 multiStateContainer.show<SuccessState>()
 //错误页
@@ -113,7 +113,7 @@ multiStateContainer.show<LoadingState>()
 #### 动态设置state
 
 ```kotlin
-multiStateContainer.show<ErrorState>{errorState->
+multiStateContainer.show<ErrorState>{errorState ->
     errorState.setErrorMsg("xxx出错了")
 }
 ```
@@ -121,7 +121,7 @@ multiStateContainer.show<ErrorState>{errorState->
 #### 设置重试回调
 
 ```kotlin
-val multiStateContainer = MultiStatePage.multiState(view){
+val multiStateContainer = MultiStatePage.bindMultiState(view){
     Toast.makeText(context, "retry", Toast.LENGTH_SHORT).show()
 }
 ```
@@ -163,7 +163,7 @@ class LottieWaitingState : MultiState() {
 class LottieExtActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val multiStateContainer = multiStateActivityRoot()
+        val multiStateContainer = bindMultiState()
         multiStateContainer.show<LottieWaitingState>()
     }
 }
@@ -230,6 +230,7 @@ val multiStateContainer = multiStateActivityRoot()
 multiStateContainer.showLoading()
 ```
 ## 更新日志
+- 1.0.4(2020/11/04) api重命名 `Activity`和`View`统一为`bindMultiState()`
 - 1.0.3(2020/10/26) 修复state内存泄漏, 移除register函数
 - 1.0.2(2020/10/23) 支持指定重试view, 支持ViewBinding 
 - 1.0.1(2020/09/22) 支持内置状态页信息配置, 支持alpha动画时长配置
