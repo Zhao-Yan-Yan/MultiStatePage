@@ -10,7 +10,6 @@ import kotlinx.coroutines.delay
 class RefreshStateActivity : BaseActivity<ActivityRefreshStateBinding>() {
     private var count = 0
     override fun initPage() {
-
         val multiStateActivityRoot = bindMultiState {
             lifecycleScope.launchWhenCreated {
                 it.show<LoadingState>()
@@ -19,9 +18,9 @@ class RefreshStateActivity : BaseActivity<ActivityRefreshStateBinding>() {
                     it.setErrorMsg("鸡你太美 ${++count}")
                     it.setErrorIcon(R.mipmap.jntm)
                 }
-
             }
         }
+
         lifecycleScope.launchWhenCreated {
             multiStateActivityRoot.show<LoadingState>()
             delay(2000)

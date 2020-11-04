@@ -3,7 +3,6 @@ package com.zy.multistatepage
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
@@ -20,7 +19,7 @@ import com.zy.multistatepage.state.SuccessState
 class MultiStateContainer(
     context: Context,
     private val originTargetView: View,
-    private val retryListener: (multiStateContainer: MultiStateContainer) -> Unit
+    private val onRetryEventListener: OnRetryEventListener
 ) : FrameLayout(context) {
 
     private var statePoll: MutableMap<Class<out MultiState>, MultiState> = mutableMapOf()
@@ -29,7 +28,14 @@ class MultiStateContainer(
         duration = MultiStatePage.config.alphaDuration
     }
 
-    fun <T : MultiState> show(clazz: Class<T>, notify: (T) -> Unit = {}) {
+    fun <T : MultiState> show(clazz: Class<T>) {
+        show(clazz, onNotifyListener = { })
+    }
+
+    fun <T : MultiState> show(
+        clazz: Class<T>,
+        onNotifyListener: OnNotifyListener<T> = OnNotifyListener { }
+    ) {
         findState(clazz)?.let { multiState ->
             removeAllViews()
             if (multiState is SuccessState) {
@@ -41,19 +47,20 @@ class MultiStateContainer(
                     originTargetView.layoutParams = targetViewLayoutParams
                 }
             } else {
-                val view = multiState.onCreateMultiStateView(context, LayoutInflater.from(context), this)
+                val view =
+                    multiState.onCreateMultiStateView(context, LayoutInflater.from(context), this)
                 multiState.onMultiStateViewCreate(view)
                 val retryView = multiState.bindRetryView()
                 if (multiState.enableReload()) {
                     if (retryView != null) {
-                        retryView.setOnClickListener { retryListener.invoke(this) }
+                        retryView.setOnClickListener { onRetryEventListener.onRetryEvent(this) }
                     } else {
-                        view.setOnClickListener { retryListener.invoke(this) }
+                        view.setOnClickListener { onRetryEventListener.onRetryEvent(this) }
                     }
                 }
                 addView(view)
                 view.doAnimator()
-                notify.invoke(multiState as T)
+                onNotifyListener.onNotify(multiState as T)
             }
         }
     }

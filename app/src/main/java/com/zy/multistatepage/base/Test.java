@@ -1,10 +1,18 @@
 package com.zy.multistatepage.base;
 
+import android.app.Activity;
 import android.app.Application;
+import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.Nullable;
+
+import com.zy.multistatepage.MultiState;
+import com.zy.multistatepage.MultiStateConfig;
 import com.zy.multistatepage.MultiStateContainer;
 import com.zy.multistatepage.MultiStatePage;
+import com.zy.multistatepage.OnNotifyListener;
+import com.zy.multistatepage.OnRetryEventListener;
 import com.zy.multistatepage.state.LottieOtherState;
 
 import kotlin.Unit;
@@ -17,35 +25,32 @@ import kotlin.jvm.functions.Function1;
  * @Description: TODO
  * @CreateDate: 2020/9/19 12:39
  */
-class Test extends Application {
+class Test extends Activity {
+
     @Override
-    public void onCreate() {
-        super.onCreate();
-       /* new Config.Builder()
-                .alphaDuration()
-                .emptyIcon()
-                .emptyMsg()
-                .errorIcon()
-                .errorMsg()
-                .loadingMsg()
-                .build();
-        MultiStatePage.config(config);*/
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
 
         View view = new View(this);
 
-        MultiStateContainer multiStateContainer = MultiStatePage.bindMultiState(view, new Function1<MultiStateContainer, Unit>() {
-            @Override
-            public Unit invoke(MultiStateContainer multiStateContainer) {
+        MultiStatePage.bindMultiState(this);
+        MultiStatePage.bindMultiState(view);
 
-                return Unit.INSTANCE;
+        MultiStateContainer multiStateContainer = MultiStatePage.bindMultiState(view, new OnRetryEventListener() {
+            @Override
+            public void onRetryEvent(MultiStateContainer multiStateContainer) {
+
             }
         });
 
-        multiStateContainer.show(LottieOtherState.class, new Function1<LottieOtherState, Unit>() {
+
+        multiStateContainer.show(LottieOtherState.class);
+
+        multiStateContainer.show(LottieOtherState.class, new OnNotifyListener<LottieOtherState>() {
             @Override
-            public Unit invoke(LottieOtherState lottieOtherState) {
-                //回调
-                return null;
+            public void onNotify(LottieOtherState multiState) {
+
             }
         });
 

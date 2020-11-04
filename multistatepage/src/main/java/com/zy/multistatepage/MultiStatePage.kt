@@ -23,11 +23,19 @@ object MultiStatePage {
     @JvmStatic
     fun bindMultiState(
         targetView: View,
-        retryListener: (multiStateContainer: MultiStateContainer) -> Unit = {}
+    ): MultiStateContainer {
+        return bindMultiState(targetView, onRetryEventListener = { })
+    }
+
+    @JvmStatic
+    fun bindMultiState(
+        targetView: View,
+        onRetryEventListener: OnRetryEventListener
     ): MultiStateContainer {
         val parent = targetView.parent as ViewGroup?
         var targetViewIndex = 0
-        val multiStateContainer = MultiStateContainer(targetView.context, targetView, retryListener)
+        val multiStateContainer =
+            MultiStateContainer(targetView.context, targetView, onRetryEventListener)
         parent?.let { targetViewParent ->
             for (i in 0 until targetViewParent.childCount) {
                 if (targetViewParent.getChildAt(i) == targetView) {
@@ -42,27 +50,38 @@ object MultiStatePage {
         return multiStateContainer
     }
 
+
     /**
      * 实现原理
      * 1. android.R.id.content 是Activity setContentView 内容的父view
      * 2. 在这个view中移除原本要添加的contentView
      * 3. 将MultiStateContainer设置为 content的子View  MultiStateContainer中持有原有的Activity setContentView
      */
+
     @JvmStatic
     fun bindMultiState(
         activity: Activity,
-        retryListener: (multiStateContainer: MultiStateContainer) -> Unit = {}
+    ): MultiStateContainer {
+        return bindMultiState(activity, onRetryEventListener = { })
+    }
+
+    @JvmStatic
+    fun bindMultiState(
+        activity: Activity,
+        onRetryEventListener: OnRetryEventListener
     ): MultiStateContainer {
         val targetView = activity.findViewById<ViewGroup>(android.R.id.content)
         val targetViewIndex = 0
         val oldContent: View = targetView.getChildAt(targetViewIndex)
         targetView.removeView(oldContent)
         val oldLayoutParams = oldContent.layoutParams
-        val multiStateContainer = MultiStateContainer(oldContent.context, oldContent, retryListener)
+        val multiStateContainer =
+            MultiStateContainer(oldContent.context, oldContent, onRetryEventListener)
         targetView.addView(multiStateContainer, targetViewIndex, oldLayoutParams)
         multiStateContainer.show<SuccessState>()
         return multiStateContainer
     }
+
 
     var config: MultiStateConfig = MultiStateConfig()
 

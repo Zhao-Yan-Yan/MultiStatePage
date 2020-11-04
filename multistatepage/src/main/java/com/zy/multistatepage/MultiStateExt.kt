@@ -10,8 +10,8 @@ import android.view.View
  * @Description: TODO
  * @CreateDate: 2020/9/17 17:10
  */
-fun View.bindMultiState(retryListener: (multiStateContainer: MultiStateContainer) -> Unit = {}) =
-    MultiStatePage.bindMultiState(this, retryListener)
+fun View.bindMultiState(onRetryEventListener: OnRetryEventListener = OnRetryEventListener {  }) =
+    MultiStatePage.bindMultiState(this, onRetryEventListener)
 
-fun Activity.bindMultiState(retryListener: (multiStateContainer: MultiStateContainer) -> Unit = {}) =
-    MultiStatePage.bindMultiState(this, retryListener)
+fun Activity.bindMultiState(onRetryEventListener: OnRetryEventListener = OnRetryEventListener {  }) =
+    MultiStatePage.bindMultiState(this, onRetryEventListener)
