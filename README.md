@@ -279,6 +279,7 @@ multiStateContainer.showLoading()
 multiStateContainer.showSuccess()
 ```
 ## 更新日志
+- 1.0.6(2020/11/05) 优化state切换策略 保留原view
 - 1.0.5(2020/11/04) `kotlin`函数类型参数更换为`java interface`对`java`的调用更友好
 - 1.0.4(2020/11/04) api重命名 `Activity`和`View`统一为`bindMultiState()`
 - 1.0.3(2020/10/26) 修复state内存泄漏, 移除register函数
