@@ -3,7 +3,6 @@ package com.zy.multistatepage
 import android.app.Activity
 import android.view.View
 import android.view.ViewGroup
-import com.zy.multistatepage.state.SuccessState
 
 /**
  * @ProjectName: MultiStatePage
@@ -46,7 +45,7 @@ object MultiStatePage {
             targetViewParent.removeView(targetView)
             targetViewParent.addView(multiStateContainer, targetViewIndex, targetView.layoutParams)
         }
-        multiStateContainer.show<SuccessState>()
+        multiStateContainer.initialization()
         return multiStateContainer
     }
 
@@ -78,7 +77,7 @@ object MultiStatePage {
         val multiStateContainer =
             MultiStateContainer(oldContent.context, oldContent, onRetryEventListener)
         targetView.addView(multiStateContainer, targetViewIndex, oldLayoutParams)
-        multiStateContainer.show<SuccessState>()
+        multiStateContainer.initialization()
         return multiStateContainer
     }
 

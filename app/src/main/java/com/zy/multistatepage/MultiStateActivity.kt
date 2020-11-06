@@ -1,9 +1,6 @@
 package com.zy.multistatepage
 
-import com.zy.multistatepage.base.BaseActivity
-import com.zy.multistatepage.base.mockError
-import com.zy.multistatepage.base.mockRandom
-import com.zy.multistatepage.base.mockSuccess
+import com.zy.multistatepage.base.*
 import com.zy.multistatepage.databinding.ActivityMultiStateBinding
 
 class MultiStateActivity : BaseActivity<ActivityMultiStateBinding>() {
@@ -13,6 +10,14 @@ class MultiStateActivity : BaseActivity<ActivityMultiStateBinding>() {
             mockSuccess(it)
         }
         mockError(multiStateActivityRoot)
+
+        /*val bindMultiState = bindMultiState()
+         MainScope().launch {
+             bindMultiState.showLoading()
+             delay(1000)
+             tv.text = "ohhhhhhhhhhhhh"
+             bindMultiState.showSuccess()
+         }*/
     }
 
 }
