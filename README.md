@@ -203,7 +203,7 @@ class LottieWaitingState : MultiState() {
 
 `bindRetryView` 绑定重试点击事件的`view` 默认为根`view`
 
-结合`ViewBidng` 参考 `demo` [MultiStateBinding](app/src/main/java/com/zy/multistatepage/base/MultiStateBinding.kt) 和 [MultiStateBinding](app/src/main/java/com/zy/multistatepage/state/WithBindingState.kt)
+结合`ViewBidng` 参考 `demo` [MultiStateBinding](app/src/main/java/com/zy/multistatepage/base/MultiStateBinding.kt) 和 [WithBindingState](app/src/main/java/com/zy/multistatepage/state/WithBindingState.kt)
 
 #### 2.show (1.0.3后无需register)
 
