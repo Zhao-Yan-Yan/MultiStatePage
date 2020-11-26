@@ -41,7 +41,7 @@ Step2. Add the dependency
 [![](https://jitpack.io/v/Zhao-Yan-Yan/MultiStatePage.svg)](https://jitpack.io/#Zhao-Yan-Yan/MultiStatePage)
 ```
 dependencies {
-    implementation 'com.github.Zhao-Yan-Yan:MultiStatePage:1.0.5'
+    implementation 'com.github.Zhao-Yan-Yan:MultiStatePage:1.0.6'
 }
 ```
 ### 1.生成MultiStateContainer
@@ -203,7 +203,7 @@ class LottieWaitingState : MultiState() {
 
 `bindRetryView` 绑定重试点击事件的`view` 默认为根`view`
 
-结合`ViewBidng` 参考 `demo` [MultiStateBinding](app/src/main/java/com/zy/multistatepage/base/MultiStateBinding.kt) 和 [MultiStateBinding](app/src/main/java/com/zy/multistatepage/state/WithBindingState.kt)
+结合`ViewBidng` 参考 `demo` [MultiStateBinding](app/src/main/java/com/zy/multistatepage/base/MultiStateBinding.kt) 和 [WithBindingState](app/src/main/java/com/zy/multistatepage/state/WithBindingState.kt)
 
 #### 2.show (1.0.3后无需register)
 
@@ -279,6 +279,7 @@ multiStateContainer.showLoading()
 multiStateContainer.showSuccess()
 ```
 ## 更新日志
+- 1.0.6(2020/11/06) 优化state切换策略 保留原view
 - 1.0.5(2020/11/04) `kotlin`函数类型参数更换为`java interface`对`java`的调用更友好
 - 1.0.4(2020/11/04) api重命名 `Activity`和`View`统一为`bindMultiState()`
 - 1.0.3(2020/10/26) 修复state内存泄漏, 移除register函数
