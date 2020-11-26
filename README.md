@@ -41,7 +41,7 @@ Step2. Add the dependency
 [![](https://jitpack.io/v/Zhao-Yan-Yan/MultiStatePage.svg)](https://jitpack.io/#Zhao-Yan-Yan/MultiStatePage)
 ```
 dependencies {
-    implementation 'com.github.Zhao-Yan-Yan:MultiStatePage:1.0.6'
+    implementation 'com.github.Zhao-Yan-Yan:MultiStatePage:1.0.7'
 }
 ```
 ### 1.生成MultiStateContainer
@@ -279,6 +279,7 @@ multiStateContainer.showLoading()
 multiStateContainer.showSuccess()
 ```
 ## 更新日志
+- 1.0.7(2020/11/26) 小优化 移除部分log打印
 - 1.0.6(2020/11/06) 优化state切换策略 保留原view
 - 1.0.5(2020/11/04) `kotlin`函数类型参数更换为`java interface`对`java`的调用更友好
 - 1.0.4(2020/11/04) api重命名 `Activity`和`View`统一为`bindMultiState()`
