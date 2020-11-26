@@ -5,6 +5,7 @@ import com.zy.multistatepage.base.startActivity
 import com.zy.multistatepage.databinding.ActivityMainBinding
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
+
     override fun initPage() {
         //Activity 中使用
         viewBinding.btnActivity.setOnClickListener {

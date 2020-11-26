@@ -45,7 +45,6 @@ class MultiStateContainer(
         onNotifyListener: OnNotifyListener<T> = OnNotifyListener { }
     ) {
         findState(clazz)?.let { multiState ->
-            Log.e("TAG", "show: $childCount")
             if (childCount == 0) {
                 addView(originTargetView, 0)
             }

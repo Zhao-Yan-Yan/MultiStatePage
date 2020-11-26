@@ -10,8 +10,8 @@ android {
         applicationId "com.zy.multistatepage"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 6
-        versionName "1.0.6"
+        versionCode 7
+        versionName "1.0.7"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

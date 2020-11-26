@@ -50,7 +50,7 @@ class Test extends Activity {
         multiStateContainer.show(LottieOtherState.class, new OnNotifyListener<LottieOtherState>() {
             @Override
             public void onNotify(LottieOtherState multiState) {
-
+                System.out.println("");
             }
         });
 
