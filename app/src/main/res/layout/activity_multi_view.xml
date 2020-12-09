@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="15dp"
     android:clipToPadding="false"
+    android:padding="15dp"
     tools:context=".MultiViewActivity">
 
     <LinearLayout
@@ -27,14 +27,15 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_marginTop="15dp"
-            android:background="@android:color/holo_green_dark">
+            android:background="@android:color/holo_green_dark"
+            android:padding="30dp">
 
             <include layout="@layout/layout_content" />
         </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="300dp"
             android:layout_marginTop="15dp"
             android:orientation="horizontal">
 

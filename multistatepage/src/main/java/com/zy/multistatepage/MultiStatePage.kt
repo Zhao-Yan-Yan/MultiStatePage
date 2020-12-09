@@ -49,7 +49,6 @@ object MultiStatePage {
         return multiStateContainer
     }
 
-
     /**
      * 实现原理
      * 1. android.R.id.content 是Activity setContentView 内容的父view

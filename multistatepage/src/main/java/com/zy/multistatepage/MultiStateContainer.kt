@@ -6,6 +6,7 @@ import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.zy.multistatepage.state.SuccessState
 
@@ -18,9 +19,9 @@ import com.zy.multistatepage.state.SuccessState
  */
 @SuppressLint("ViewConstructor")
 class MultiStateContainer(
-    context: Context,
-    private val originTargetView: View,
-    private val onRetryEventListener: OnRetryEventListener
+        context: Context,
+        private val originTargetView: View,
+        private val onRetryEventListener: OnRetryEventListener
 ) : FrameLayout(context) {
     private var statePoll: MutableMap<Class<out MultiState>, MultiState> = mutableMapOf()
 
@@ -29,7 +30,8 @@ class MultiStateContainer(
     }
 
     fun initialization() {
-        addView(originTargetView, 0)
+        val layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        addView(originTargetView, 0, layoutParams)
     }
 
     inline fun <reified T : MultiState> show(noinline notify: (T) -> Unit = {}) {
@@ -41,12 +43,12 @@ class MultiStateContainer(
     }
 
     fun <T : MultiState> show(
-        clazz: Class<T>,
-        onNotifyListener: OnNotifyListener<T> = OnNotifyListener { }
+            clazz: Class<T>,
+            onNotifyListener: OnNotifyListener<T> = OnNotifyListener { }
     ) {
         findState(clazz)?.let { multiState ->
             if (childCount == 0) {
-                addView(originTargetView, 0)
+                initialization()
             }
             if (childCount > 1) {
                 removeViewAt(1)
@@ -54,15 +56,10 @@ class MultiStateContainer(
             if (multiState is SuccessState) {
                 originTargetView.visibility = View.VISIBLE
                 originTargetView.doAnimator()
-                val targetViewLayoutParams = originTargetView.layoutParams
-                if (targetViewLayoutParams is MarginLayoutParams) {
-                    targetViewLayoutParams.setMargins(0, 0, 0, 0)
-                    originTargetView.layoutParams = targetViewLayoutParams
-                }
             } else {
                 originTargetView.visibility = View.GONE
                 val currentStateView =
-                    multiState.onCreateMultiStateView(context, LayoutInflater.from(context), this)
+                        multiState.onCreateMultiStateView(context, LayoutInflater.from(context), this)
                 multiState.onMultiStateViewCreate(currentStateView)
                 val retryView = multiState.bindRetryView()
                 if (multiState.enableReload()) {
