@@ -5,15 +5,15 @@
 
 点击或者扫描二维码下载
 
-[![QR code](imgs/QRCode.png)](https://www.pgyer.com/1uvC)
+[![QR code](http://note.youdao.com/yws/public/resource/337a20d817085d4975aca9fd6a381d7c/xmlnote/791CA9D271194A4794BA9E682617C108/6391)](https://www.pgyer.com/1uvC)
 
 | [Activity](app/src/main/java/com/zy/multistatepage/MultiStateActivity.kt) | [Fragment](app/src/main/java/com/zy/multistatepage/MultiFragmentActivity.kt) | [View](app/src/main/java/com/zy/multistatepage/MultiViewActivity.kt) | [ViewPager2](app/src/main/java/com/zy/multistatepage/ViewPager2Activity.kt) |
 | :-----: | :----: | :----: | :----: |
-| ![](imgs/activity.gif) | ![](imgs/fragment.gif) | ![](imgs/view.gif) | ![](imgs/viewpager2.gif) |
+| ![](http://note.youdao.com/yws/public/resource/337a20d817085d4975aca9fd6a381d7c/xmlnote/B3E80C87043E4B4FA45AF2384F2F7801/6390) | ![](http://note.youdao.com/yws/public/resource/337a20d817085d4975aca9fd6a381d7c/xmlnote/DD66581941CB4A2697F837A21B0133FC/6392) | ![](http://note.youdao.com/yws/public/resource/337a20d817085d4975aca9fd6a381d7c/xmlnote/CA12B6C3EC7C4CA7BD978BD2AAF2FDED/6387) | ![](http://note.youdao.com/yws/public/resource/337a20d817085d4975aca9fd6a381d7c/xmlnote/9B7B08B11C774006AEB19F31578DB818/6385) |
 
-| [Lottie拓展（自定义State）](app/src/main/java/com/zy/multistatepage/LottieExtActivity.kt) | [State刷新](app/src/main/java/com/zy/multistatepage/RefreshStateActivity.kt) | [网络请求](app/src/main/java/com/zy/multistatepage/MockNetActivity.kt) | [mock](app/src/main/java/com/zy/multistatepage/ApiActivity.kt) |
+| [Lottie拓展（自定义State）](app/src/main/java/com/zy/multistatepage/LottieExtActivity.kt) | [State刷新](app/src/main/java/com/zy/multistatepage/RefreshStateActivity.kt) | [网络请求](app/src/main/java/com/zy/multistatepage/MockNetActivity.kt) | [sample](app/src/main/java/com/zy/multistatepage/ApiActivity.kt) |
 | :-----: | :----: | :----: | :-----: |
-| ![](imgs/lottie.gif) | ![](imgs/state_call.gif) | ![](imgs/net.gif) | ![](imgs/api.gif) |
+| ![](http://note.youdao.com/yws/public/resource/337a20d817085d4975aca9fd6a381d7c/xmlnote/EEF9350FA76C41D78055D574CCA991B4/6386) | ![](http://note.youdao.com/yws/public/resource/337a20d817085d4975aca9fd6a381d7c/xmlnote/E62590F1454D43AD8130D9959213864F/6388) | ![](http://note.youdao.com/yws/public/resource/337a20d817085d4975aca9fd6a381d7c/xmlnote/07A45E92B8A44587B7F1F9011EB20860/6389) | ![](http://note.youdao.com/yws/public/resource/337a20d817085d4975aca9fd6a381d7c/xmlnote/42D4B19C28D843A0AD25D45D5E0839C9/6393) |
 
 ## MultiStatePage的功能及特点
 - 无需在布局添加视图代码
