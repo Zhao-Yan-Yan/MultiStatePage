@@ -9,11 +9,11 @@
 
 | [Activity](app/src/main/java/com/zy/multistatepage/MultiStateActivity.kt) | [Fragment](app/src/main/java/com/zy/multistatepage/MultiFragmentActivity.kt) | [View](app/src/main/java/com/zy/multistatepage/MultiViewActivity.kt) | [ViewPager2](app/src/main/java/com/zy/multistatepage/ViewPager2Activity.kt) |
 | :-----: | :----: | :----: | :----: |
-| ![](http://note.youdao.com/yws/public/resource/337a20d817085d4975aca9fd6a381d7c/xmlnote/B3E80C87043E4B4FA45AF2384F2F7801/6390) | ![](http://note.youdao.com/yws/public/resource/337a20d817085d4975aca9fd6a381d7c/xmlnote/DD66581941CB4A2697F837A21B0133FC/6392) | ![](http://note.youdao.com/yws/public/resource/337a20d817085d4975aca9fd6a381d7c/xmlnote/CA12B6C3EC7C4CA7BD978BD2AAF2FDED/6387) | ![](http://note.youdao.com/yws/public/resource/337a20d817085d4975aca9fd6a381d7c/xmlnote/9B7B08B11C774006AEB19F31578DB818/6385) |
+| ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c130b72ecd32467daa81ba01a1cd1104~tplv-k3u1fbpfcp-zoom-1.image) | ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/26850300b75c45f5b3492826bb9d679e~tplv-k3u1fbpfcp-zoom-1.image) | ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/89817b91a608459489135b09a32a48ef~tplv-k3u1fbpfcp-zoom-1.image) | ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4b7999fc47124157a2343740ef7280cb~tplv-k3u1fbpfcp-zoom-1.image) |
 
 | [Lottie拓展（自定义State）](app/src/main/java/com/zy/multistatepage/LottieExtActivity.kt) | [State刷新](app/src/main/java/com/zy/multistatepage/RefreshStateActivity.kt) | [网络请求](app/src/main/java/com/zy/multistatepage/MockNetActivity.kt) | [sample](app/src/main/java/com/zy/multistatepage/ApiActivity.kt) |
 | :-----: | :----: | :----: | :-----: |
-| ![](http://note.youdao.com/yws/public/resource/337a20d817085d4975aca9fd6a381d7c/xmlnote/EEF9350FA76C41D78055D574CCA991B4/6386) | ![](http://note.youdao.com/yws/public/resource/337a20d817085d4975aca9fd6a381d7c/xmlnote/E62590F1454D43AD8130D9959213864F/6388) | ![](http://note.youdao.com/yws/public/resource/337a20d817085d4975aca9fd6a381d7c/xmlnote/07A45E92B8A44587B7F1F9011EB20860/6389) | ![](http://note.youdao.com/yws/public/resource/337a20d817085d4975aca9fd6a381d7c/xmlnote/42D4B19C28D843A0AD25D45D5E0839C9/6393) |
+| ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a7501637d9b34814954384cc3a8956e3~tplv-k3u1fbpfcp-zoom-1.image) | ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4135913938b349b7993284d394107248~tplv-k3u1fbpfcp-zoom-1.image) | ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0fc57adc96dd42ea9e527ae22c61698d~tplv-k3u1fbpfcp-zoom-1.image) | ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9ca7768654fc4f1eb68e4becc39c854c~tplv-k3u1fbpfcp-zoom-1.image) |
 
 ## MultiStatePage的功能及特点
 - 无需在布局添加视图代码
