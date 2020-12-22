@@ -1,5 +1,3 @@
-# <p align="center">MultiStatePage</p>
-
 <p align="center">
     <img align="center" alt="MultiStatePage" src="/imgs/background.png" />
 </p>
