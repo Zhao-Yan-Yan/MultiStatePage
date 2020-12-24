@@ -27,7 +27,7 @@ class MultiStateContainer(
     private var animator = ValueAnimator.ofFloat(0.0f, 1.0f).apply {
         duration = MultiStatePage.config.alphaDuration
     }
-
+    private var enableOriginTargetViewAnimator = true
     fun initialization() {
         val layoutParams = ViewGroup.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
@@ -55,12 +55,22 @@ class MultiStateContainer(
             if (childCount > 1) {
                 removeViewAt(1)
             }
+            //1 展示原view
+            //2 不需要执行动画
             if (multiState is SuccessState) {
                 originTargetView.visibility = View.VISIBLE
-                originTargetView.doAnimator()
+                if (enableOriginTargetViewAnimator) {
+                    originTargetView.doAnimator()
+                }
             } else {
-                originTargetView.visibility = View.GONE
-                val currentStateView = multiState.onCreateMultiStateView(context, LayoutInflater.from(context), this)
+                if (!multiState.dialogMode()) {
+                    originTargetView.visibility = View.GONE
+                    enableOriginTargetViewAnimator = true
+                } else {
+                    enableOriginTargetViewAnimator = false
+                }
+                val currentStateView =
+                    multiState.onCreateMultiStateView(context, LayoutInflater.from(context), this)
                 multiState.onMultiStateViewCreate(currentStateView)
                 val retryView = multiState.bindRetryView()
                 if (multiState.enableReload() && retryView != null) {
@@ -69,7 +79,9 @@ class MultiStateContainer(
                     currentStateView.setOnClickListener { onRetryEventListener.onRetryEvent(this) }
                 }
                 addView(currentStateView)
-                currentStateView.doAnimator()
+                if (!multiState.dialogMode()) {
+                    currentStateView.doAnimator()
+                }
                 onNotifyListener.onNotify(multiState as T)
             }
         }

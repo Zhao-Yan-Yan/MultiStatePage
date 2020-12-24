@@ -16,6 +16,9 @@ class ApiActivity : BaseActivity<ActivityApiBinding>() {
             multiState.show<LoadingState>()
         }
 
+        viewBinding.btnDialogLoading.setOnClickListener {
+            multiState.show<DialogLoadingState>()
+        }
 
         viewBinding.btnSuccess.setOnClickListener {
             multiState.show<SuccessState>()

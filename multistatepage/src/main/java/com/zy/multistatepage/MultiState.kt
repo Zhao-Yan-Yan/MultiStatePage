@@ -39,4 +39,8 @@ abstract class MultiState {
      */
     open fun bindRetryView(): View? = null
 
+    /**
+     * dialog 模式
+     */
+    open fun dialogMode(): Boolean = false
 }
