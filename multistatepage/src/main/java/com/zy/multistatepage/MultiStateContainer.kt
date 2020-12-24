@@ -3,7 +3,6 @@ package com.zy.multistatepage
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,18 +18,21 @@ import com.zy.multistatepage.state.SuccessState
  */
 @SuppressLint("ViewConstructor")
 class MultiStateContainer(
-        context: Context,
-        private val originTargetView: View,
-        private val onRetryEventListener: OnRetryEventListener
+    context: Context,
+    private val originTargetView: View,
+    private val onRetryEventListener: OnRetryEventListener
 ) : FrameLayout(context) {
-    private var statePoll: MutableMap<Class<out MultiState>, MultiState> = mutableMapOf()
+    private var statePool: MutableMap<Class<out MultiState>, MultiState> = mutableMapOf()
 
     private var animator = ValueAnimator.ofFloat(0.0f, 1.0f).apply {
         duration = MultiStatePage.config.alphaDuration
     }
 
     fun initialization() {
-        val layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        val layoutParams = ViewGroup.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.MATCH_PARENT
+        )
         addView(originTargetView, 0, layoutParams)
     }
 
@@ -43,8 +45,8 @@ class MultiStateContainer(
     }
 
     fun <T : MultiState> show(
-            clazz: Class<T>,
-            onNotifyListener: OnNotifyListener<T> = OnNotifyListener { }
+        clazz: Class<T>,
+        onNotifyListener: OnNotifyListener<T> = OnNotifyListener { }
     ) {
         findState(clazz)?.let { multiState ->
             if (childCount == 0) {
@@ -58,16 +60,13 @@ class MultiStateContainer(
                 originTargetView.doAnimator()
             } else {
                 originTargetView.visibility = View.GONE
-                val currentStateView =
-                        multiState.onCreateMultiStateView(context, LayoutInflater.from(context), this)
+                val currentStateView = multiState.onCreateMultiStateView(context, LayoutInflater.from(context), this)
                 multiState.onMultiStateViewCreate(currentStateView)
                 val retryView = multiState.bindRetryView()
-                if (multiState.enableReload()) {
-                    if (retryView != null) {
-                        retryView.setOnClickListener { onRetryEventListener.onRetryEvent(this) }
-                    } else {
-                        currentStateView.setOnClickListener { onRetryEventListener.onRetryEvent(this) }
-                    }
+                if (multiState.enableReload() && retryView != null) {
+                    retryView.setOnClickListener { onRetryEventListener.onRetryEvent(this) }
+                } else {
+                    currentStateView.setOnClickListener { onRetryEventListener.onRetryEvent(this) }
                 }
                 addView(currentStateView)
                 currentStateView.doAnimator()
@@ -77,11 +76,11 @@ class MultiStateContainer(
     }
 
     private fun <T : MultiState> findState(clazz: Class<T>): MultiState? {
-        return if (statePoll.containsKey(clazz)) {
-            statePoll[clazz]
+        return if (statePool.containsKey(clazz)) {
+            statePool[clazz]
         } else {
             val state = clazz.newInstance()
-            statePoll[clazz] = state
+            statePool[clazz] = state
             state
         }
     }

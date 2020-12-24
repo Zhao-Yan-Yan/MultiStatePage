@@ -7,6 +7,6 @@ package com.zy.multistatepage;
  * @Description: TODO
  * @CreateDate: 2020/11/4 16:04
  */
-public interface OnNotifyListener<T> {
+public interface OnNotifyListener<T extends MultiState> {
     void onNotify(T multiState);
 }

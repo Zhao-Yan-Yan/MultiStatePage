@@ -55,7 +55,6 @@ object MultiStatePage {
      * 2. 在这个view中移除原本要添加的contentView
      * 3. 将MultiStateContainer设置为 content的子View  MultiStateContainer中持有原有的Activity setContentView
      */
-
     @JvmStatic
     fun bindMultiState(
         activity: Activity,

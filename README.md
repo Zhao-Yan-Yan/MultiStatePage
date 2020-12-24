@@ -47,7 +47,7 @@ Step2. Add the dependency
 [![](https://jitpack.io/v/Zhao-Yan-Yan/MultiStatePage.svg)](https://jitpack.io/#Zhao-Yan-Yan/MultiStatePage)
 ```
 dependencies {
-    implementation 'com.github.Zhao-Yan-Yan:MultiStatePage:1.0.8'
+    implementation 'com.github.Zhao-Yan-Yan:MultiStatePage:1.0.9'
 }
 ```
 ### 1.生成MultiStateContainer
@@ -285,14 +285,15 @@ multiStateContainer.showLoading()
 multiStateContainer.showSuccess()
 ```
 ## 更新日志
-- 1.0.8(2020/12/09) 修复LinearLayout权重异常
-- 1.0.7(2020/11/26) 小优化 移除部分log打印
-- 1.0.6(2020/11/06) 优化state切换策略 保留原view
+- 1.0.9(2020/12/24) fixed #8
+- 1.0.8(2020/12/09) 修复`LinearLayout`权重异常
+- 1.0.7(2020/11/26) 小优化 移除部分`log`打印
+- 1.0.6(2020/11/06) 优化`state`切换策略 保留原`view`
 - 1.0.5(2020/11/04) `kotlin`函数类型参数更换为`java interface`对`java`的调用更友好
 - 1.0.4(2020/11/04) api重命名 `Activity`和`View`统一为`bindMultiState()`
-- 1.0.3(2020/10/26) 修复state内存泄漏, 移除register函数
-- 1.0.2(2020/10/23) 支持指定重试view, 支持ViewBinding 
-- 1.0.1(2020/09/22) 支持内置状态页信息配置, 支持alpha动画时长配置
+- 1.0.3(2020/10/26) 修复`state`内存泄漏, 移除`register`函数
+- 1.0.2(2020/10/23) 支持指定重试`view`, 支持`ViewBinding` 
+- 1.0.1(2020/09/22) 支持内置状态页信息配置, 支持`alpha`动画时长配置
 
 ## Thanks
 - [DylanCaiCoding/LoadingHelper](https://github.com/DylanCaiCoding/LoadingHelper/) 

@@ -25,5 +25,4 @@ class SuccessState : MultiState() {
 
     override fun onMultiStateViewCreate(view: View) = Unit
 
-    override fun enableReload(): Boolean = false
 }

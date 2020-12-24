@@ -17,7 +17,7 @@ import com.zy.multistatepage.R
  * @CreateDate: 2020/9/17 14:15
  */
 class LoadingState : MultiState() {
-    lateinit var tvLoadingMsg: TextView
+    private lateinit var tvLoadingMsg: TextView
     override fun onCreateMultiStateView(
         context: Context,
         inflater: LayoutInflater,
@@ -30,8 +30,6 @@ class LoadingState : MultiState() {
         tvLoadingMsg = view.findViewById(R.id.tv_loading_msg)
         setLoadingMsg(MultiStatePage.config.loadingMsg)
     }
-
-    override fun enableReload(): Boolean = false
 
     fun setLoadingMsg(loadingMsg: String) {
         tvLoadingMsg.text = loadingMsg

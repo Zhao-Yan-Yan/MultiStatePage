@@ -39,8 +39,6 @@ class EmptyState : MultiState() {
         setEmptyIcon(MultiStatePage.config.emptyIcon)
     }
 
-    override fun enableReload(): Boolean = false
-
     fun setEmptyMsg(emptyMsg: String) {
         tvEmptyMsg.text = emptyMsg
     }
