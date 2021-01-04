@@ -150,9 +150,10 @@ class JavaFragment extends Fragment {
 ```
 
 ### 2.切换状态
-调用  `MultiStateContainer.show<T>()` 方法
+**调用  `MultiStateContainer.show<T>()` 方法**
 
 **默认内置3种状态**
+
 ```kotlin
 val multiStateContainer = MultiStatePage.bindMultiState(view)
 //成功页 
@@ -163,6 +164,16 @@ multiStateContainer.show<ErrorState>()
 multiStateContainer.show<EmptyState>()
 //加载状态页
 multiStateContainer.show<LoadingState>()
+```
+
+**1.1.0新增 `show(multiState: MultiState)`**
+
+```kotlin
+val lottieOtherState = LottieOtherState()
+lottieOtherState.retry = {
+	Toast.makeText(this, "retry...", Toast.LENGTH_SHORT).show()
+}
+multiStateContainer.show(lottieOtherState)
 ```
 
 #### 动态设置state
@@ -286,6 +297,7 @@ multiStateContainer.showLoading()
 multiStateContainer.showSuccess()
 ```
 ## 更新日志
+- 1.1.0(2021/01/04) 新增`show(multiState: MultiState)`
 - 1.0.9(2020/12/24) demo 包名调整 `enableReload`不强制实现,默认`false`
 - 1.0.8(2020/12/09) 修复`LinearLayout`权重异常
 - 1.0.7(2020/11/26) 小优化 移除部分`log`打印

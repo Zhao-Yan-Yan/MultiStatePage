@@ -40,6 +40,5 @@ class ApiActivity : BaseActivity<ActivityApiBinding>() {
             }
             multiState.show(lottieOtherState)
         }
-
     }
 }
