@@ -3,6 +3,7 @@ package com.zy.demo.state
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Toast
 import com.zy.demo.R
 import com.zy.multistatepage.MultiState
 import com.zy.multistatepage.MultiStateContainer
@@ -15,6 +16,7 @@ import com.zy.multistatepage.MultiStateContainer
  * @CreateDate: 2020/9/17 16:58
  */
 class LottieOtherState : MultiState() {
+    var retry: (() -> Unit)? = null
     override fun onCreateMultiStateView(
         context: Context,
         inflater: LayoutInflater,
@@ -24,6 +26,8 @@ class LottieOtherState : MultiState() {
     }
 
     override fun onMultiStateViewCreate(view: View) {
+        view.findViewById<View>(R.id.animation).setOnClickListener {
+            retry?.invoke()
+        }
     }
-
 }

@@ -20,7 +20,7 @@ import com.zy.multistatepage.state.SuccessState
 class MultiStateContainer(
     context: Context,
     private val originTargetView: View,
-    private val onRetryEventListener: OnRetryEventListener
+    private val onRetryEventListener: OnRetryEventListener? = null
 ) : FrameLayout(context) {
     private var statePool: MutableMap<Class<out MultiState>, MultiState> = mutableMapOf()
 
@@ -28,6 +28,7 @@ class MultiStateContainer(
         duration = MultiStatePage.config.alphaDuration
     }
     private var enableOriginTargetViewAnimator = true
+
     fun initialization() {
         val layoutParams = ViewGroup.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
@@ -41,49 +42,58 @@ class MultiStateContainer(
     }
 
     fun <T : MultiState> show(clazz: Class<T>) {
-        show(clazz, onNotifyListener = { })
+        show(clazz, onNotifyListener = null)
     }
 
     fun <T : MultiState> show(
         clazz: Class<T>,
-        onNotifyListener: OnNotifyListener<T> = OnNotifyListener { }
+        onNotifyListener: OnNotifyListener<T>? = null
     ) {
         findState(clazz)?.let { multiState ->
-            if (childCount == 0) {
-                initialization()
+            show(multiState as T, onNotifyListener)
+        }
+    }
+
+    fun <T : MultiState> show(multiState: T) {
+        show(multiState, onNotifyListener = null)
+    }
+
+    fun <T : MultiState> show(
+        multiState: T,
+        onNotifyListener: OnNotifyListener<T>? = null
+    ) {
+        if (childCount == 0) {
+            initialization()
+        }
+        if (childCount > 1) {
+            removeViewAt(1)
+        }
+        if (multiState is SuccessState) {
+            originTargetView.visibility = View.VISIBLE
+            if (enableOriginTargetViewAnimator) {
+                originTargetView.doAnimator()
             }
-            if (childCount > 1) {
-                removeViewAt(1)
-            }
-            //1 展示原view
-            //2 不需要执行动画
-            if (multiState is SuccessState) {
-                originTargetView.visibility = View.VISIBLE
-                if (enableOriginTargetViewAnimator) {
-                    originTargetView.doAnimator()
-                }
+        } else {
+            if (!multiState.dialogMode()) {
+                originTargetView.visibility = View.GONE
+                enableOriginTargetViewAnimator = true
             } else {
-                if (!multiState.dialogMode()) {
-                    originTargetView.visibility = View.GONE
-                    enableOriginTargetViewAnimator = true
-                } else {
-                    enableOriginTargetViewAnimator = false
-                }
-                val currentStateView =
-                    multiState.onCreateMultiStateView(context, LayoutInflater.from(context), this)
-                multiState.onMultiStateViewCreate(currentStateView)
-                val retryView = multiState.bindRetryView()
-                if (multiState.enableReload() && retryView != null) {
-                    retryView.setOnClickListener { onRetryEventListener.onRetryEvent(this) }
-                } else {
-                    currentStateView.setOnClickListener { onRetryEventListener.onRetryEvent(this) }
-                }
-                addView(currentStateView)
-                if (!multiState.dialogMode()) {
-                    currentStateView.doAnimator()
-                }
-                onNotifyListener.onNotify(multiState as T)
+                enableOriginTargetViewAnimator = false
             }
+            val currentStateView =
+                multiState.onCreateMultiStateView(context, LayoutInflater.from(context), this)
+            multiState.onMultiStateViewCreate(currentStateView)
+            val retryView = multiState.bindRetryView()
+            if (multiState.enableReload() && retryView != null) {
+                retryView.setOnClickListener { onRetryEventListener?.onRetryEvent(this) }
+            } else {
+                currentStateView.setOnClickListener { onRetryEventListener?.onRetryEvent(this) }
+            }
+            addView(currentStateView)
+            if (!multiState.dialogMode()) {
+                currentStateView.doAnimator()
+            }
+            onNotifyListener?.onNotify(multiState)
         }
     }
 

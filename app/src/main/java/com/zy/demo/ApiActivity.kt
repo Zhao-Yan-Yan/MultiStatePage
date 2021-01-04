@@ -1,5 +1,6 @@
 package com.zy.demo
 
+import android.widget.Toast
 import com.zy.demo.databinding.ActivityApiBinding
 import com.zy.demo.state.LottieWaitingState
 import com.zy.demo.base.BaseActivity
@@ -24,11 +25,9 @@ class ApiActivity : BaseActivity<ActivityApiBinding>() {
             multiState.show<SuccessState>()
         }
 
-
         viewBinding.btnEmpty.setOnClickListener {
             multiState.show<EmptyState>()
         }
-
 
         viewBinding.btnError.setOnClickListener {
             multiState.show<ErrorState>()
@@ -40,8 +39,9 @@ class ApiActivity : BaseActivity<ActivityApiBinding>() {
         }
 
         viewBinding.btnLottie2.setOnClickListener {
-            multiState.show<LottieOtherState>()
+            val lottieOtherState = LottieOtherState()
+            lottieOtherState.retry = { Toast.makeText(this, "retry...", Toast.LENGTH_SHORT).show() }
+            multiState.show(lottieOtherState)
         }
-
     }
 }
