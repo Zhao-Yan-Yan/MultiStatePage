@@ -20,7 +20,7 @@ import com.zy.multistatepage.state.SuccessState
 class MultiStateContainer(
     context: Context,
     private val originTargetView: View,
-    private val onRetryEventListener: OnRetryEventListener
+    private val onRetryEventListener: OnRetryEventListener? = null
 ) : FrameLayout(context) {
     private var statePool: MutableMap<Class<out MultiState>, MultiState> = mutableMapOf()
 
@@ -40,38 +40,44 @@ class MultiStateContainer(
         show(T::class.java, notify)
     }
 
+    fun <T : MultiState> show(multiState: T) {
+        show(multiState, null)
+    }
+
+    fun <T : MultiState> show(multiState: T, onNotifyListener: OnNotifyListener<T>? = null) {
+        if (childCount == 0) {
+            initialization()
+        }
+        if (childCount > 1) {
+            removeViewAt(1)
+        }
+        if (multiState is SuccessState) {
+            originTargetView.visibility = View.VISIBLE
+            originTargetView.doAnimator()
+        } else {
+            originTargetView.visibility = View.GONE
+            val currentStateView =
+                multiState.onCreateMultiStateView(context, LayoutInflater.from(context), this)
+            multiState.onMultiStateViewCreate(currentStateView)
+            val retryView = multiState.bindRetryView()
+            if (multiState.enableReload() && retryView != null) {
+                retryView.setOnClickListener { onRetryEventListener?.onRetryEvent(this) }
+            } else {
+                currentStateView.setOnClickListener { onRetryEventListener?.onRetryEvent(this) }
+            }
+            addView(currentStateView)
+            currentStateView.doAnimator()
+            onNotifyListener?.onNotify(multiState)
+        }
+    }
+
     fun <T : MultiState> show(clazz: Class<T>) {
         show(clazz, onNotifyListener = { })
     }
 
-    fun <T : MultiState> show(
-        clazz: Class<T>,
-        onNotifyListener: OnNotifyListener<T> = OnNotifyListener { }
-    ) {
+    fun <T : MultiState> show(clazz: Class<T>, onNotifyListener: OnNotifyListener<T>? = null) {
         findState(clazz)?.let { multiState ->
-            if (childCount == 0) {
-                initialization()
-            }
-            if (childCount > 1) {
-                removeViewAt(1)
-            }
-            if (multiState is SuccessState) {
-                originTargetView.visibility = View.VISIBLE
-                originTargetView.doAnimator()
-            } else {
-                originTargetView.visibility = View.GONE
-                val currentStateView = multiState.onCreateMultiStateView(context, LayoutInflater.from(context), this)
-                multiState.onMultiStateViewCreate(currentStateView)
-                val retryView = multiState.bindRetryView()
-                if (multiState.enableReload() && retryView != null) {
-                    retryView.setOnClickListener { onRetryEventListener.onRetryEvent(this) }
-                } else {
-                    currentStateView.setOnClickListener { onRetryEventListener.onRetryEvent(this) }
-                }
-                addView(currentStateView)
-                currentStateView.doAnimator()
-                onNotifyListener.onNotify(multiState as T)
-            }
+            show(multiState as T, onNotifyListener)
         }
     }
 

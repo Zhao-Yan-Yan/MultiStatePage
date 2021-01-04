@@ -3,6 +3,7 @@ package com.zy.demo.base;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -38,7 +39,6 @@ class Test extends Activity {
             }
         });
 
-
         multiStateContainer.show(LottieOtherState.class);
 
         multiStateContainer.show(LottieOtherState.class, new OnNotifyListener<LottieOtherState>() {
@@ -48,5 +48,11 @@ class Test extends Activity {
             }
         });
 
+        LottieOtherState lottieOtherState = new LottieOtherState();
+        lottieOtherState.setRetry(() -> {
+            Toast.makeText(this, "", Toast.LENGTH_SHORT);
+            return null;
+        });
+        multiStateContainer.show(lottieOtherState);
     }
 }
