@@ -6,6 +6,7 @@
 
 [![](https://jitpack.io/v/Zhao-Yan-Yan/MultiStatePage.svg)](https://jitpack.io/#Zhao-Yan-Yan/MultiStatePage)
 [![License](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](https://github.com/Zhao-Yan-Yan/MultiStatePage/blob/master/LICENSE) 
+![](https://img.shields.io/badge/language-kotlin-orange.svg)
 
 ## 下载Demo
 
@@ -285,7 +286,7 @@ multiStateContainer.showLoading()
 multiStateContainer.showSuccess()
 ```
 ## 更新日志
-- 1.0.9(2020/12/24) fixed #8
+- 1.0.9(2020/12/24) demo 包名调整 `enableReload`不强制实现,默认`false`
 - 1.0.8(2020/12/09) 修复`LinearLayout`权重异常
 - 1.0.7(2020/11/26) 小优化 移除部分`log`打印
 - 1.0.6(2020/11/06) 优化`state`切换策略 保留原`view`
