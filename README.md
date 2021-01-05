@@ -1,7 +1,3 @@
-<p align="center">
-    <img align="center" alt="MultiStatePage" src="/imgs/background.png" />
-</p>
-
 # MultiStatePage
 
 [![](https://jitpack.io/v/Zhao-Yan-Yan/MultiStatePage.svg)](https://jitpack.io/#Zhao-Yan-Yan/MultiStatePage)
@@ -150,7 +146,7 @@ class JavaFragment extends Fragment {
 ```
 
 ### 2.切换状态
-**调用  `MultiStateContainer.show<T>()` 方法**
+** `MultiStateContainer.show<T>()` / 'MultiStateContainer.show(MultiState)` **
 
 **默认内置3种状态**
 
