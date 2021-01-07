@@ -44,7 +44,7 @@ Step2. Add the dependency
 [![](https://jitpack.io/v/Zhao-Yan-Yan/MultiStatePage.svg)](https://jitpack.io/#Zhao-Yan-Yan/MultiStatePage)
 ```
 dependencies {
-    implementation 'com.github.Zhao-Yan-Yan:MultiStatePage:1.0.9'
+    implementation 'com.github.Zhao-Yan-Yan:MultiStatePage:1.1.0'
 }
 ```
 ### 1.生成MultiStateContainer
