@@ -146,7 +146,16 @@ class JavaFragment extends Fragment {
 ```
 
 ### 2.切换状态
-** `MultiStateContainer.show<T>()` / 'MultiStateContainer.show(MultiState)` **
+#### `MultiStateContainer.show<T>()`
+```kotlin
+multiStateContainer.show<XXXState>()
+```
+
+#### `MultiStateContainer.show(MultiState)`
+```kotlin
+val state = XXXState()
+multiStateContainer.show(state)
+```
 
 **默认内置3种状态**
 
