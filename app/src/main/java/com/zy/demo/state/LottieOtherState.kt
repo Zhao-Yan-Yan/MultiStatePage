@@ -15,7 +15,9 @@ import com.zy.multistatepage.MultiStateContainer
  * @CreateDate: 2020/9/17 16:58
  */
 class LottieOtherState : MultiState() {
-    var retry = {}
+
+    var retry: (() -> Unit)? = null
+
     override fun onCreateMultiStateView(
         context: Context,
         inflater: LayoutInflater,
@@ -25,7 +27,7 @@ class LottieOtherState : MultiState() {
     }
 
     override fun onMultiStateViewCreate(view: View) {
-        view.findViewById<View>(R.id.view).setOnClickListener { retry.invoke() }
+        view.findViewById<View>(R.id.view).setOnClickListener { retry?.invoke() }
     }
 
 }
