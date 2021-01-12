@@ -45,7 +45,7 @@ Step2. Add the dependency
 
 ```
 dependencies {
-    implementation 'com.github.Zhao-Yan-Yan:MultiStatePage:1.1.0'
+    implementation 'com.github.Zhao-Yan-Yan:MultiStatePage:1.1.1'
 }
 ```
 ### 1.生成MultiStateContainer
