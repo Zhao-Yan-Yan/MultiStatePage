@@ -42,6 +42,7 @@ allprojects {
 
 Step2. Add the dependency
 [![](https://jitpack.io/v/Zhao-Yan-Yan/MultiStatePage.svg)](https://jitpack.io/#Zhao-Yan-Yan/MultiStatePage)
+
 ```
 dependencies {
     implementation 'com.github.Zhao-Yan-Yan:MultiStatePage:1.0.9'
@@ -293,6 +294,7 @@ multiStateContainer.showLoading()
 multiStateContainer.showSuccess()
 ```
 ## 更新日志
+- 1.1.1(2021/01/12) 优化`enableReload`处理
 - 1.1.0(2021/01/04) 新增`show(multiState: MultiState)`
 - 1.0.9(2020/12/24) demo 包名调整 `enableReload`不强制实现,默认`false`
 - 1.0.8(2020/12/09) 修复`LinearLayout`权重异常

@@ -60,10 +60,12 @@ class MultiStateContainer(
                 multiState.onCreateMultiStateView(context, LayoutInflater.from(context), this)
             multiState.onMultiStateViewCreate(currentStateView)
             val retryView = multiState.bindRetryView()
-            if (multiState.enableReload() && retryView != null) {
-                retryView.setOnClickListener { onRetryEventListener?.onRetryEvent(this) }
-            } else {
-                currentStateView.setOnClickListener { onRetryEventListener?.onRetryEvent(this) }
+            if (multiState.enableReload()) {
+                if (retryView != null) {
+                    retryView.setOnClickListener { onRetryEventListener?.onRetryEvent(this) }
+                } else {
+                    currentStateView.setOnClickListener { onRetryEventListener?.onRetryEvent(this) }
+                }
             }
             addView(currentStateView)
             currentStateView.doAnimator()
