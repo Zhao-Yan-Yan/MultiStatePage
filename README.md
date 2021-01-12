@@ -45,7 +45,7 @@ Step2. Add the dependency
 
 ```
 dependencies {
-    implementation 'com.github.Zhao-Yan-Yan:MultiStatePage:1.0.9'
+    implementation 'com.github.Zhao-Yan-Yan:MultiStatePage:1.1.0'
 }
 ```
 ### 1.生成MultiStateContainer
@@ -147,7 +147,16 @@ class JavaFragment extends Fragment {
 ```
 
 ### 2.切换状态
-** `MultiStateContainer.show<T>()` / 'MultiStateContainer.show(MultiState)` **
+#### `MultiStateContainer.show<T>()`
+```kotlin
+multiStateContainer.show<XXXState>()
+```
+
+#### `MultiStateContainer.show(MultiState)`
+```kotlin
+val state = XXXState()
+multiStateContainer.show(state)
+```
 
 **默认内置3种状态**
 
