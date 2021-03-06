@@ -27,6 +27,12 @@ class MultiStateContainer : FrameLayout {
 
     private var lastState: String = ""
 
+    private var statePool: MutableMap<Class<out MultiState>, MultiState> = mutableMapOf()
+
+    private var animator = ValueAnimator.ofFloat(0.0f, 1.0f).apply {
+        duration = MultiStatePage.config.alphaDuration
+    }
+
     constructor(
         context: Context,
         originTargetView: View,
@@ -54,12 +60,6 @@ class MultiStateContainer : FrameLayout {
         }
     }
 
-    private var statePool: MutableMap<Class<out MultiState>, MultiState> = mutableMapOf()
-
-    private var animator = ValueAnimator.ofFloat(0.0f, 1.0f).apply {
-        duration = MultiStatePage.config.alphaDuration
-    }
-
     fun initialization() {
         val layoutParams = ViewGroup.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
@@ -80,14 +80,12 @@ class MultiStateContainer : FrameLayout {
         if (childCount > 1) {
             removeViewAt(1)
         }
-        if (lastState == SuccessState::class.java.name) {
-            return
-        } else {
-            lastState = multiState.javaClass.name
-        }
         if (multiState is SuccessState) {
-            originTargetView?.visibility = View.VISIBLE
-            originTargetView?.executeAnimator()
+            //如果上次展示的是SuccessState则跳过
+            if (lastState != SuccessState::class.java.name) {
+                originTargetView?.visibility = View.VISIBLE
+                if (enableAnimator) originTargetView?.executeAnimator()
+            }
         } else {
             originTargetView?.visibility = View.INVISIBLE
             val currentStateView = multiState.onCreateMultiStateView(context, LayoutInflater.from(context), this)
@@ -101,11 +99,11 @@ class MultiStateContainer : FrameLayout {
                 }
             }
             addView(currentStateView)
-            if (enableAnimator) {
-                currentStateView.executeAnimator()
-            }
+            if (enableAnimator) currentStateView.executeAnimator()
             onNotifyListener?.onNotify(multiState)
         }
+        //记录上次展示的state
+        lastState = multiState.javaClass.name
     }
 
     @JvmOverloads

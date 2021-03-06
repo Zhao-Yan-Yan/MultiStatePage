@@ -32,6 +32,8 @@ class SmartRefreshLayoutActivity : BaseActivity<ActivitySmartRefreshLayoutBindin
         viewBinding.recyclerView.adapter = rlvAdapter
         loadData()
 
+        viewBinding.smartRefreshLayout.setEnableLoadMoreWhenContentNotFull(false)
+
         viewBinding.smartRefreshLayout.setOnRefreshListener {
             rlvAdapter.refreshData(getData(50))
             viewBinding.container.showSuccess()
@@ -46,12 +48,15 @@ class SmartRefreshLayoutActivity : BaseActivity<ActivitySmartRefreshLayoutBindin
             loadData()
         }
         viewBinding.btnContent.setOnClickListener {
+            rlvAdapter.refreshData(getData(50))
             viewBinding.container.showSuccess()
         }
         viewBinding.btnError.setOnClickListener {
+            rlvAdapter.clearData()
             viewBinding.container.showError()
         }
         viewBinding.btnEmpty.setOnClickListener {
+            rlvAdapter.clearData()
             viewBinding.container.showEmpty()
         }
     }
@@ -96,6 +101,11 @@ class SmartRefreshLayoutActivity : BaseActivity<ActivitySmartRefreshLayoutBindin
 
         fun refreshData(data: MutableList<String>) {
             this.data = data
+            notifyDataSetChanged()
+        }
+
+        fun clearData() {
+            this.data.clear()
             notifyDataSetChanged()
         }
     }
