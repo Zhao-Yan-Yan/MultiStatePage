@@ -21,9 +21,11 @@ import com.zy.multistatepage.state.SuccessState
 @SuppressLint("ViewConstructor")
 class MultiStateContainer : FrameLayout {
 
-    var originTargetView: View? = null
-
     var onRetryEventListener: OnRetryEventListener? = null
+
+    private var originTargetView: View? = null
+
+    private var lastState: String = ""
 
     constructor(
         context: Context,
@@ -34,14 +36,20 @@ class MultiStateContainer : FrameLayout {
         this.onRetryEventListener = onRetryEventListener
     }
 
-    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+    constructor(
+        context: Context,
+        attrs: AttributeSet?
+    ) : this(context, attrs, 0)
 
-    }
+    constructor(
+        context: Context,
+        attrs: AttributeSet?,
+        defStyleAttr: Int
+    ) : super(context, attrs, defStyleAttr)
 
     override fun onFinishInflate() {
         super.onFinishInflate()
-        if (childCount == 1) {
+        if (originTargetView == null && childCount == 1) {
             originTargetView = getChildAt(0)
         }
     }
@@ -66,6 +74,13 @@ class MultiStateContainer : FrameLayout {
 
     @JvmOverloads
     fun <T : MultiState> show(multiState: T, enableAnimator: Boolean = true, onNotifyListener: OnNotifyListener<T>? = null) {
+
+        if (lastState == multiState.javaClass.name) {
+            return
+        }
+
+        lastState = multiState.javaClass.name
+
         if (childCount == 0) {
             initialization()
         }
