@@ -68,4 +68,7 @@ dependencies {
     implementation project(':multistatepage')
 
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.5'
+
+    implementation  'com.scwang.smart:refresh-layout-kernel:2.0.3'      //核心必须依赖
+    implementation  'com.scwang.smart:refresh-header-classics:2.0.3'    //经典刷新头
 }

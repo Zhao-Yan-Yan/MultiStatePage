@@ -3,6 +3,7 @@ package com.zy.demo
 import com.zy.demo.databinding.ActivityMainBinding
 import com.zy.demo.base.BaseActivity
 import com.zy.demo.base.startActivity
+import kotlinx.android.synthetic.main.multi_lottie_other.*
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
@@ -38,5 +39,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         viewBinding.btnNet.setOnClickListener {
             startActivity<MockNetActivity>()
         }
+
+        viewBinding.smartRefreshLayout.setOnClickListener {
+            startActivity<SmartRefreshLayoutActivity>()
+        }
+
     }
 }

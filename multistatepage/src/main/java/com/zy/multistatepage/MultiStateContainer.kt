@@ -22,6 +22,7 @@ class MultiStateContainer(
     private val originTargetView: View,
     private val onRetryEventListener: OnRetryEventListener? = null
 ) : FrameLayout(context) {
+
     private var statePool: MutableMap<Class<out MultiState>, MultiState> = mutableMapOf()
 
     private var animator = ValueAnimator.ofFloat(0.0f, 1.0f).apply {
@@ -40,10 +41,7 @@ class MultiStateContainer(
         show(T::class.java, notify)
     }
 
-    fun <T : MultiState> show(multiState: T) {
-        show(multiState, null)
-    }
-
+    @JvmOverloads
     fun <T : MultiState> show(multiState: T, onNotifyListener: OnNotifyListener<T>? = null) {
         if (childCount == 0) {
             initialization()
@@ -73,14 +71,9 @@ class MultiStateContainer(
         }
     }
 
-    fun <T : MultiState> show(clazz: Class<T>) {
-        show(clazz, onNotifyListener = { })
-    }
-
+    @JvmOverloads
     fun <T : MultiState> show(clazz: Class<T>, onNotifyListener: OnNotifyListener<T>? = null) {
-        findState(clazz)?.let { multiState ->
-            show(multiState as T, onNotifyListener)
-        }
+        findState(clazz)?.let { multiState -> show(multiState as T, onNotifyListener) }
     }
 
     private fun <T : MultiState> findState(clazz: Class<T>): MultiState? {

@@ -20,13 +20,7 @@ object MultiStatePage {
      * 3.MultiStateContainer 的 layoutParams 是原目标View的 layoutParams
      */
     @JvmStatic
-    fun bindMultiState(
-        targetView: View,
-    ): MultiStateContainer {
-        return bindMultiState(targetView, null)
-    }
-
-    @JvmStatic
+    @JvmOverloads
     fun bindMultiState(
         targetView: View,
         onRetryEventListener: OnRetryEventListener? = null
@@ -56,13 +50,7 @@ object MultiStatePage {
      * 3. 将MultiStateContainer设置为 content的子View  MultiStateContainer中持有原有的Activity setContentView
      */
     @JvmStatic
-    fun bindMultiState(
-        activity: Activity,
-    ): MultiStateContainer {
-        return bindMultiState(activity, null)
-    }
-
-    @JvmStatic
+    @JvmOverloads
     fun bindMultiState(
         activity: Activity,
         onRetryEventListener: OnRetryEventListener? = null

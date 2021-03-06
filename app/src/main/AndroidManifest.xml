@@ -12,13 +12,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RefreshStateActivity"/>
+        <activity android:name=".RefreshStateActivity" />
         <activity android:name=".ApiActivity" />
         <activity android:name=".MultiViewActivity" />
         <activity android:name=".MockNetActivity" />
         <activity android:name=".LottieExtActivity" />
         <activity android:name=".ViewPager2Activity" />
         <activity android:name=".MultiFragmentActivity" />
+        <activity android:name=".SmartRefreshLayoutActivity" />
         <activity android:name=".MultiStateActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

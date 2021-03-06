@@ -1,9 +1,17 @@
 package com.zy.demo.base
 
 import android.app.Application
+import android.content.Context
+import com.scwang.smart.refresh.footer.ClassicsFooter
+import com.scwang.smart.refresh.header.ClassicsHeader
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
+import com.scwang.smart.refresh.layout.api.RefreshHeader
+import com.scwang.smart.refresh.layout.api.RefreshLayout
+import com.scwang.smart.refresh.layout.listener.DefaultRefreshHeaderCreator
+import com.zy.demo.R
 import com.zy.multistatepage.MultiStateConfig
 import com.zy.multistatepage.MultiStatePage
-import com.zy.multistatepage.R
+
 
 /**
  * @ProjectName: MultiStatePage
@@ -25,5 +33,20 @@ class App : Application() {
             .build()
 
         MultiStatePage.config(config)
+    }
+
+    companion object {
+        init {
+            //设置全局的Header构建器
+            SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout ->
+                ClassicsHeader(context)
+            }
+            //设置全局的Footer构建器
+            SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout ->
+                ClassicsFooter(context).apply {
+                    setDrawableSize(20f)
+                }
+            }
+        }
     }
 }
