@@ -18,11 +18,12 @@ import kotlinx.coroutines.launch
  * @Description: TODO
  * @CreateDate: 2020/9/17 15:04
  */
-fun mockRandom(multiStateContainer: MultiStateContainer) {
+fun mockRandom(multiStateContainer: MultiStateContainer, block: () -> Unit) {
     MainScope().launch {
         multiStateContainer.show<LoadingState>()
         val delayTime = (10..30).random() * 100.toLong()
         delay(delayTime)
+        block.invoke()
         when ((1..3).random()) {
             1 -> multiStateContainer.show<SuccessState>()
             2 -> multiStateContainer.show<EmptyState>()

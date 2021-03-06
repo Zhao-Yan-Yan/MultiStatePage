@@ -3,6 +3,8 @@ package com.zy.multistatepage
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,11 +19,32 @@ import com.zy.multistatepage.state.SuccessState
  * @CreateDate: 2020/9/17 11:54
  */
 @SuppressLint("ViewConstructor")
-class MultiStateContainer(
-    context: Context,
-    private val originTargetView: View,
-    private val onRetryEventListener: OnRetryEventListener? = null
-) : FrameLayout(context) {
+class MultiStateContainer : FrameLayout {
+
+    var originTargetView: View? = null
+
+    var onRetryEventListener: OnRetryEventListener? = null
+
+    constructor(
+        context: Context,
+        originTargetView: View,
+        onRetryEventListener: OnRetryEventListener? = null
+    ) : this(context, null) {
+        this.originTargetView = originTargetView
+        this.onRetryEventListener = onRetryEventListener
+    }
+
+    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+
+    }
+
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+        if (childCount == 1) {
+            originTargetView = getChildAt(0)
+        }
+    }
 
     private var statePool: MutableMap<Class<out MultiState>, MultiState> = mutableMapOf()
 
@@ -37,12 +60,12 @@ class MultiStateContainer(
         addView(originTargetView, 0, layoutParams)
     }
 
-    inline fun <reified T : MultiState> show(noinline notify: (T) -> Unit = {}) {
-        show(T::class.java, notify)
+    inline fun <reified T : MultiState> show(enableAnimator: Boolean = true, noinline notify: (T) -> Unit = {}) {
+        show(T::class.java, enableAnimator, notify)
     }
 
     @JvmOverloads
-    fun <T : MultiState> show(multiState: T, onNotifyListener: OnNotifyListener<T>? = null) {
+    fun <T : MultiState> show(multiState: T, enableAnimator: Boolean = true, onNotifyListener: OnNotifyListener<T>? = null) {
         if (childCount == 0) {
             initialization()
         }
@@ -50,12 +73,11 @@ class MultiStateContainer(
             removeViewAt(1)
         }
         if (multiState is SuccessState) {
-            originTargetView.visibility = View.VISIBLE
-            originTargetView.doAnimator()
+            originTargetView?.visibility = View.VISIBLE
+            originTargetView?.executeAnimator()
         } else {
-            originTargetView.visibility = View.GONE
-            val currentStateView =
-                multiState.onCreateMultiStateView(context, LayoutInflater.from(context), this)
+            originTargetView?.visibility = View.INVISIBLE
+            val currentStateView = multiState.onCreateMultiStateView(context, LayoutInflater.from(context), this)
             multiState.onMultiStateViewCreate(currentStateView)
             val retryView = multiState.bindRetryView()
             if (multiState.enableReload()) {
@@ -66,14 +88,18 @@ class MultiStateContainer(
                 }
             }
             addView(currentStateView)
-            currentStateView.doAnimator()
+            if (enableAnimator) {
+                currentStateView.executeAnimator()
+            }
             onNotifyListener?.onNotify(multiState)
         }
     }
 
     @JvmOverloads
-    fun <T : MultiState> show(clazz: Class<T>, onNotifyListener: OnNotifyListener<T>? = null) {
-        findState(clazz)?.let { multiState -> show(multiState as T, onNotifyListener) }
+    fun <T : MultiState> show(clazz: Class<T>, enableAnimator: Boolean = true, onNotifyListener: OnNotifyListener<T>? = null) {
+        findState(clazz)?.let { multiState ->
+            show(multiState as T, enableAnimator, onNotifyListener)
+        }
     }
 
     private fun <T : MultiState> findState(clazz: Class<T>): MultiState? {
@@ -86,7 +112,7 @@ class MultiStateContainer(
         }
     }
 
-    private fun View.doAnimator() {
+    private fun View.executeAnimator() {
         this.clearAnimation()
         animator.addUpdateListener {
             this.alpha = it.animatedValue as Float

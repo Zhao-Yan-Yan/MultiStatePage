@@ -13,6 +13,8 @@ import com.zy.multistatepage.OnNotifyListener;
 import com.zy.multistatepage.OnRetryEventListener;
 import com.zy.demo.state.LottieOtherState;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * @ProjectName: MultiStatePage
  * @Author: 赵岩
@@ -34,14 +36,14 @@ class Test extends Activity {
 
         MultiStateContainer multiStateContainer = MultiStatePage.bindMultiState(view, new OnRetryEventListener() {
             @Override
-            public void onRetryEvent(MultiStateContainer multiStateContainer) {
+            public void onRetryEvent(@NotNull MultiStateContainer multiStateContainer) {
 
             }
         });
 
         multiStateContainer.show(LottieOtherState.class);
 
-        multiStateContainer.show(LottieOtherState.class, new OnNotifyListener<LottieOtherState>() {
+        multiStateContainer.show(LottieOtherState.class, true, new OnNotifyListener<LottieOtherState>() {
             @Override
             public void onNotify(LottieOtherState multiState) {
                 System.out.println("");

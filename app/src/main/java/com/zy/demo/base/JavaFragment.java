@@ -14,6 +14,8 @@ import com.zy.multistatepage.MultiStateContainer;
 import com.zy.multistatepage.MultiStatePage;
 import com.zy.multistatepage.OnRetryEventListener;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * @ProjectName: MultiStatePage
  * @Author: 赵岩
@@ -28,7 +30,7 @@ class JavaFragment extends Fragment {
         View root = inflater.inflate(R.layout.activity_main, container, false);
         MultiStateContainer multiStateContainer = MultiStatePage.bindMultiState(root, new OnRetryEventListener() {
             @Override
-            public void onRetryEvent(MultiStateContainer multiStateContainer) {
+            public void onRetryEvent(@NotNull MultiStateContainer multiStateContainer) {
 
             }
         });

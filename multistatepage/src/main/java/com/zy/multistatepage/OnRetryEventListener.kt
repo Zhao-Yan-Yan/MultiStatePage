@@ -8,5 +8,5 @@ package com.zy.multistatepage
  * @CreateDate: 2020/11/4 15:49
  */
 fun interface OnRetryEventListener {
-    fun onRetryEvent(multiStateContainer: MultiStateContainer?)
+    fun onRetryEvent(multiStateContainer: MultiStateContainer)
 }

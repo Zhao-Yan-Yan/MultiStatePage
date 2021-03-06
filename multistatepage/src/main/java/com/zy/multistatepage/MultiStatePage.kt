@@ -27,8 +27,7 @@ object MultiStatePage {
     ): MultiStateContainer {
         val parent = targetView.parent as ViewGroup?
         var targetViewIndex = 0
-        val multiStateContainer =
-            MultiStateContainer(targetView.context, targetView, onRetryEventListener)
+        val multiStateContainer = MultiStateContainer(targetView.context, targetView, onRetryEventListener)
         parent?.let { targetViewParent ->
             for (i in 0 until targetViewParent.childCount) {
                 if (targetViewParent.getChildAt(i) == targetView) {
@@ -60,8 +59,7 @@ object MultiStatePage {
         val oldContent: View = targetView.getChildAt(targetViewIndex)
         targetView.removeView(oldContent)
         val oldLayoutParams = oldContent.layoutParams
-        val multiStateContainer =
-            MultiStateContainer(oldContent.context, oldContent, onRetryEventListener)
+        val multiStateContainer = MultiStateContainer(oldContent.context, oldContent, onRetryEventListener)
         targetView.addView(multiStateContainer, targetViewIndex, oldLayoutParams)
         multiStateContainer.initialization()
         return multiStateContainer
