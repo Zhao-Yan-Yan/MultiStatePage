@@ -74,18 +74,16 @@ class MultiStateContainer : FrameLayout {
 
     @JvmOverloads
     fun <T : MultiState> show(multiState: T, enableAnimator: Boolean = true, onNotifyListener: OnNotifyListener<T>? = null) {
-
-        if (lastState == multiState.javaClass.name) {
-            return
-        }
-
-        lastState = multiState.javaClass.name
-
         if (childCount == 0) {
             initialization()
         }
         if (childCount > 1) {
             removeViewAt(1)
+        }
+        if (lastState == SuccessState::class.java.name) {
+            return
+        } else {
+            lastState = multiState.javaClass.name
         }
         if (multiState is SuccessState) {
             originTargetView?.visibility = View.VISIBLE
