@@ -107,10 +107,7 @@ class ErrorState : MultiState() {
 
     private var retry: OnRetryClickListener? = null
 
-    override fun onCreateMultiStateView(
-        context: Context,
-        inflater: LayoutInflater,
-        container: MultiStateContainer
+    override fun onCreateMultiStateView(context: Context, inflater: LayoutInflater, container: MultiStateContainer
     ): View {
         return inflater.inflate(R.layout.mult_state_error, container, false)
     }
