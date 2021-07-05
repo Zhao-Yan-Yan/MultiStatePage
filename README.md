@@ -153,12 +153,8 @@ val multiStateActivityRoot = bindMultiState().apply { showEmpty() }
 #### 继承`MultiState`
 ```kotlin
 class LottieWaitingState : MultiState() {
-    override fun onCreateMultiStateView(
-        context: Context,
-        inflater: LayoutInflater,
-        container: MultiStateContainer
-    ): View {
-      	// state view
+    override fun onCreateMultiStateView(context: Context, inflater: LayoutInflater, container: MultiStateContainer): View {
+      	// your state view
         return inflater.inflate(R.layout.multi_lottie_waiting, container, false)
     }
 
