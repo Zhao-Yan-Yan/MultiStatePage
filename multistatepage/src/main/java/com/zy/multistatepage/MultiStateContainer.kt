@@ -19,10 +19,8 @@ import com.zy.multistatepage.state.SuccessState
  * @Description: TODO
  * @CreateDate: 2020/9/17 11:54
  */
-@SuppressLint("ViewConstructor")
+@Suppress("UNCHECKED_CAST")
 class MultiStateContainer : FrameLayout {
-
-    var onRetryEventListener: OnRetryEventListener? = null
 
     private var originTargetView: View? = null
 
@@ -37,10 +35,8 @@ class MultiStateContainer : FrameLayout {
     constructor(
         context: Context,
         originTargetView: View,
-        onRetryEventListener: OnRetryEventListener? = null
     ) : this(context, null) {
         this.originTargetView = originTargetView
-        this.onRetryEventListener = onRetryEventListener
     }
 
     constructor(
@@ -67,6 +63,7 @@ class MultiStateContainer : FrameLayout {
             ViewGroup.LayoutParams.MATCH_PARENT
         )
         addView(originTargetView, 0, layoutParams)
+        // MultiStatePage.config?.defaultState?.let { show(it) }
     }
 
     inline fun <reified T : MultiState> show(enableAnimator: Boolean = true, noinline notify: (T) -> Unit = {}) {
@@ -74,7 +71,11 @@ class MultiStateContainer : FrameLayout {
     }
 
     @JvmOverloads
-    fun <T : MultiState> show(multiState: T, enableAnimator: Boolean = true, onNotifyListener: OnNotifyListener<T>? = null) {
+    fun <T : MultiState> show(
+        multiState: T,
+        enableAnimator: Boolean = true,
+        onNotifyListener: OnNotifyListener<T>? = null
+    ) {
         if (childCount == 0) {
             initialization()
         }
@@ -91,14 +92,6 @@ class MultiStateContainer : FrameLayout {
             originTargetView?.visibility = View.INVISIBLE
             val currentStateView = multiState.onCreateMultiStateView(context, LayoutInflater.from(context), this)
             multiState.onMultiStateViewCreate(currentStateView)
-            val retryView = multiState.bindRetryView()
-            if (multiState.enableReload()) {
-                if (retryView != null) {
-                    retryView.setOnClickListener { onRetryEventListener?.onRetryEvent(this) }
-                } else {
-                    currentStateView.setOnClickListener { onRetryEventListener?.onRetryEvent(this) }
-                }
-            }
             addView(currentStateView)
             if (enableAnimator) currentStateView.executeAnimator()
             onNotifyListener?.onNotify(multiState)
@@ -108,10 +101,12 @@ class MultiStateContainer : FrameLayout {
     }
 
     @JvmOverloads
-    fun <T : MultiState> show(clazz: Class<T>, enableAnimator: Boolean = true, onNotifyListener: OnNotifyListener<T>? = null) {
-        findState(clazz)?.let { multiState ->
-            show(multiState as T, enableAnimator, onNotifyListener)
-        }
+    fun <T : MultiState> show(
+        clazz: Class<T>,
+        enableAnimator: Boolean = true,
+        onNotifyListener: OnNotifyListener<T>? = null
+    ) {
+        findState(clazz)?.let { multiState -> show(multiState as T, enableAnimator, onNotifyListener) }
     }
 
     private fun <T : MultiState> findState(clazz: Class<T>): MultiState? {

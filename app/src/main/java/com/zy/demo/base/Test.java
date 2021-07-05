@@ -10,10 +10,7 @@ import androidx.annotation.Nullable;
 import com.zy.multistatepage.MultiStateContainer;
 import com.zy.multistatepage.MultiStatePage;
 import com.zy.multistatepage.OnNotifyListener;
-import com.zy.multistatepage.OnRetryEventListener;
 import com.zy.demo.state.LottieOtherState;
-
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @ProjectName: MultiStatePage
@@ -34,12 +31,7 @@ class Test extends Activity {
         MultiStatePage.bindMultiState(this);
         MultiStatePage.bindMultiState(view);
 
-        MultiStateContainer multiStateContainer = MultiStatePage.bindMultiState(view, new OnRetryEventListener() {
-            @Override
-            public void onRetryEvent(@NotNull MultiStateContainer multiStateContainer) {
-
-            }
-        });
+        MultiStateContainer multiStateContainer = MultiStatePage.bindMultiState(view);
 
         multiStateContainer.show(LottieOtherState.class);
 

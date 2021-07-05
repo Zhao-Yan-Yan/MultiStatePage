@@ -14,9 +14,7 @@ import kotlinx.coroutines.launch
 class LottieExtActivity : BaseActivity<ActivityLottieExtBinding>() {
     override fun initPage() {
         MultiStatePage.bindMultiState(viewBinding.fl)
-        val multiState = MultiStatePage.bindMultiState(viewBinding.fl) {
-            mockSuccess(it)
-        }
+        val multiState = MultiStatePage.bindMultiState(viewBinding.fl)
         mockError(multiState)
     }
 
@@ -26,7 +24,9 @@ class LottieExtActivity : BaseActivity<ActivityLottieExtBinding>() {
             multiStateContainer.show<LottieWaitingState>()
             val delayTime = (10..30).random() * 100.toLong()
             delay(delayTime)
-            multiStateContainer.show<ErrorState>()
+            multiStateContainer.show<ErrorState> {
+                it.retry { mockSuccess(multiStateContainer) }
+            }
         }
     }
 

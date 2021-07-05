@@ -25,12 +25,10 @@ class MultiStateFragment : BaseFragment<FragmentMultiStateBinding>() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         inflater.inflate(R.layout.activity_api, container, false)
         val root = super.onCreateView(inflater, container, savedInstanceState)
-        multiState = root!!.bindMultiState {
-            mockSuccess(multiState)
-        }
+        multiState = root!!.bindMultiState()
         multiState.show<LoadingState>()
         return multiState
     }

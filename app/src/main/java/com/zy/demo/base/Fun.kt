@@ -37,7 +37,11 @@ fun mockError(multiStateContainer: MultiStateContainer) {
         multiStateContainer.show<LoadingState>()
         val delayTime = (10..30).random() * 100.toLong()
         delay(delayTime)
-        multiStateContainer.show<ErrorState>()
+//        val errorState = ErrorState()
+//        errorState.retry { mockSuccess(multiStateContainer) }
+        multiStateContainer.show<ErrorState> {
+            it.retry { mockSuccess(multiStateContainer) }
+        }
     }
 }
 
@@ -65,9 +69,9 @@ fun MultiStateContainer.showSuccess(callBack: () -> Unit = {}) {
     }
 }
 
-fun MultiStateContainer.showError(callBack: () -> Unit = {}) {
+fun MultiStateContainer.showError(callBack: (ErrorState) -> Unit = {}) {
     show<ErrorState> {
-        callBack.invoke()
+        callBack.invoke(it)
     }
 }
 

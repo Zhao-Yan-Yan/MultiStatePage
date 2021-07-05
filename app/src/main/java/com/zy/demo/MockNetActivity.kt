@@ -17,9 +17,7 @@ import java.lang.Exception
 class MockNetActivity : BaseActivity<ActivityMockNetBinding>() {
     private lateinit var multiState: MultiStateContainer
     override fun initPage() {
-        multiState = viewBinding.content.bindMultiState {
-            loadData()
-        }
+        multiState = viewBinding.content.bindMultiState()
         loadData()
     }
 
@@ -37,6 +35,7 @@ class MockNetActivity : BaseActivity<ActivityMockNetBinding>() {
             } catch (e: Exception) {
                 e.printStackTrace()
                 multiState.show<ErrorState> {
+                    it.retry { loadData() }
                     //可以直接设置 state 中的变量 刷新state
                     it.setErrorMsg(e.message.toString())
                 }

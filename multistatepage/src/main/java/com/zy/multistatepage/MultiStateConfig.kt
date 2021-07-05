@@ -18,7 +18,8 @@ data class MultiStateConfig(
     @DrawableRes
     val emptyIcon: Int = R.mipmap.state_empty,
     val loadingMsg: String = "loading...",
-    var alphaDuration: Long = 500
+    var alphaDuration: Long = 500,
+//    val defaultState: MultiState? = null
 ) {
 
     class Builder {
@@ -69,7 +70,7 @@ data class MultiStateConfig(
             emptyMsg = emptyMsg,
             emptyIcon = emptyIcon,
             loadingMsg = loadingMsg,
-            alphaDuration = alphaDuration
+            alphaDuration = alphaDuration,
         )
     }
 }

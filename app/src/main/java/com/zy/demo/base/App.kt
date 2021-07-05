@@ -11,6 +11,7 @@ import com.scwang.smart.refresh.layout.listener.DefaultRefreshHeaderCreator
 import com.zy.demo.R
 import com.zy.multistatepage.MultiStateConfig
 import com.zy.multistatepage.MultiStatePage
+import com.zy.multistatepage.state.EmptyState
 
 
 /**

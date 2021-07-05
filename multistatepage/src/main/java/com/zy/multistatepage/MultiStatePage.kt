@@ -23,11 +23,10 @@ object MultiStatePage {
     @JvmOverloads
     fun bindMultiState(
         targetView: View,
-        onRetryEventListener: OnRetryEventListener? = null
     ): MultiStateContainer {
         val parent = targetView.parent as ViewGroup?
         var targetViewIndex = 0
-        val multiStateContainer = MultiStateContainer(targetView.context, targetView, onRetryEventListener)
+        val multiStateContainer = MultiStateContainer(targetView.context, targetView)
         parent?.let { targetViewParent ->
             for (i in 0 until targetViewParent.childCount) {
                 if (targetViewParent.getChildAt(i) == targetView) {
@@ -52,19 +51,17 @@ object MultiStatePage {
     @JvmOverloads
     fun bindMultiState(
         activity: Activity,
-        onRetryEventListener: OnRetryEventListener? = null
     ): MultiStateContainer {
         val targetView = activity.findViewById<ViewGroup>(android.R.id.content)
         val targetViewIndex = 0
         val oldContent: View = targetView.getChildAt(targetViewIndex)
         targetView.removeView(oldContent)
         val oldLayoutParams = oldContent.layoutParams
-        val multiStateContainer = MultiStateContainer(oldContent.context, oldContent, onRetryEventListener)
+        val multiStateContainer = MultiStateContainer(oldContent.context, oldContent)
         targetView.addView(multiStateContainer, targetViewIndex, oldLayoutParams)
         multiStateContainer.initialization()
         return multiStateContainer
     }
-
 
     var config: MultiStateConfig = MultiStateConfig()
 

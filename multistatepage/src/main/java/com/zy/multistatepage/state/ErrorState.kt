@@ -25,6 +25,8 @@ class ErrorState : MultiState() {
     private lateinit var imgError: ImageView
     private lateinit var tvRetry: TextView
 
+    private var retry: OnRetryClickListener? = null
+
     override fun onCreateMultiStateView(
         context: Context,
         inflater: LayoutInflater,
@@ -40,12 +42,8 @@ class ErrorState : MultiState() {
 
         setErrorMsg(MultiStatePage.config.errorMsg)
         setErrorIcon(MultiStatePage.config.errorIcon)
-    }
 
-    override fun enableReload(): Boolean = true
-
-    override fun bindRetryView(): View? {
-        return tvRetry
+        tvRetry.setOnClickListener { retry?.retry() }
     }
 
     fun setErrorMsg(errorMsg: String) {
@@ -54,5 +52,13 @@ class ErrorState : MultiState() {
 
     fun setErrorIcon(@DrawableRes errorIcon: Int) {
         imgError.setImageResource(errorIcon)
+    }
+
+    fun retry(retry: OnRetryClickListener) {
+        this.retry = retry
+    }
+
+    fun interface OnRetryClickListener {
+        fun retry()
     }
 }

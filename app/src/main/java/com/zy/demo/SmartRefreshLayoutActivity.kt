@@ -6,13 +6,9 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewbinding.ViewBinding
 import com.zy.demo.base.*
 import com.zy.demo.databinding.ActivitySmartRefreshLayoutBinding
 import com.zy.demo.databinding.RlvItemBinding
-import com.zy.multistatepage.MultiStateContainer
-import com.zy.multistatepage.OnRetryEventListener
-import com.zy.multistatepage.bindMultiState
 import kotlinx.android.synthetic.main.multi_lottie_other.*
 import kotlinx.coroutines.delay
 
@@ -44,16 +40,16 @@ class SmartRefreshLayoutActivity : BaseActivity<ActivitySmartRefreshLayoutBindin
             viewBinding.container.showSuccess()
             it.finishLoadMore()
         }
-        viewBinding.container.onRetryEventListener = OnRetryEventListener {
-            loadData()
-        }
+
         viewBinding.btnContent.setOnClickListener {
             rlvAdapter.refreshData(getData(50))
             viewBinding.container.showSuccess()
         }
         viewBinding.btnError.setOnClickListener {
             rlvAdapter.clearData()
-            viewBinding.container.showError()
+            viewBinding.container.showError() {
+                it.retry { loadData() }
+            }
         }
         viewBinding.btnEmpty.setOnClickListener {
             rlvAdapter.clearData()

@@ -1,8 +1,6 @@
 # MultiStatePage
 
-[![](https://jitpack.io/v/Zhao-Yan-Yan/MultiStatePage.svg)](https://jitpack.io/#Zhao-Yan-Yan/MultiStatePage)
-[![License](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](https://github.com/Zhao-Yan-Yan/MultiStatePage/blob/master/LICENSE) 
-![](https://img.shields.io/badge/language-kotlin-orange.svg)
+[![](https://jitpack.io/v/Zhao-Yan-Yan/MultiStatePage.svg)](https://jitpack.io/#Zhao-Yan-Yan/MultiStatePage) [![License](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](https://github.com/Zhao-Yan-Yan/MultiStatePage/blob/master/LICENSE) ![](https://img.shields.io/badge/language-kotlin-orange.svg)
 
 ## 下载Demo
 
@@ -41,8 +39,7 @@ allprojects {
 }
 ```
 
-Step2. Add the dependency
-[![](https://jitpack.io/v/Zhao-Yan-Yan/MultiStatePage.svg)](https://jitpack.io/#Zhao-Yan-Yan/MultiStatePage)
+Step2. Add the dependency [![](https://jitpack.io/v/Zhao-Yan-Yan/MultiStatePage.svg)](https://jitpack.io/#Zhao-Yan-Yan/MultiStatePage)
 
 ```
 dependencies {
@@ -52,97 +49,29 @@ dependencies {
 ### 1.生成MultiStateContainer
 
 #### 在View上使用
-##### kotlin
-基础用法
 ```kotlin
 val multiStateContainer = MultiStatePage.bindMultiState(view)
-
-val multiStateContainer = MultiStatePage.bindMultiState(view) { multiStateContainer: MultiStateContainer ->
-    // 重试事件处理
-}
-```
-拓展方法
-```kotlin
+// 或
 val multiStateContainer = view.bindMultiState()
-
-val multiStateContainer = view.bindMultiState() { multiStateContainer: MultiStateContainer ->
-    // 重试事件处理
-}
 ```
-
-##### java
-```java
-MultiStateContainer multiStateContainer = MultiStatePage.bindMultiState(view)
-
-MultiStateContainer multiStateContainer = MultiStatePage.bindMultiState(view, new OnRetryEventListener() {
-    @Override
-    public void onRetryEvent(MultiStateContainer multiStateContainer) {
-        // 重试事件处理
-    }
-});
-```
-#### 在Activity 根View中使用
-##### kotlin
-基础用法
+#### 在Activity根View中使用
 ```kotlin
 val multiStateContainer = MultiStatePage.bindMultiState(this)
-
-val multiStateContainer = MultiStatePage.bindMultiState(this) { multiStateContainer: MultiStateContainer ->
-    // 重试事件处理
-}
-```
-拓展方法
-```kotlin
+// 或
 val multiStateContainer = bindMultiState()
-
-val multiStateContainer = bindMultiState() { multiStateContainer: MultiStateContainer ->
-    // 重试事件处理
-}
-```
-##### java
-```java
-MultiStateContainer multiStateContainer = MultiStatePage.bindMultiState(this);
-
-MultiStateContainer multiStateContainer = MultiStatePage.bindMultiState(this, new OnRetryEventListener() {
-    @Override
-    public void onRetryEvent(MultiStateContainer multiStateContainer) {
-        // 重试事件处理   
-    }
-});
 ```
 #### 在Fragment根View中使用
-##### kotlin
 ```kotlin
 class MultiStateFragment : Fragment {
     
     private lateinit var multiStateContainer: MultiStateContainer
     
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(R.layout.fragment, container, false)
-        multiStateContainer = MultiStatePage.bindMultiState(root) { multiStateContainer: MultiStateContainer ->
-            // 重试事件处理
-        }
-        //或者
-        multiStateContainer = root.bindMultiState() { multiStateContainer: MultiStateContainer ->
-            // 重试事件处理
-        }
+        multiStateContainer = MultiStatePage.bindMultiState(root)
+        // 或
+        multiStateContainer = root.bindMultiState()
         return multiStateContainer
-    }
-}
-```
-##### java
-```java
-class JavaFragment extends Fragment {
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.activity_main, container, false);
-        MultiStateContainer multiStateContainer = MultiStatePage.bindMultiState(root);
-        return multiStateContainer;
     }
 }
 ```
@@ -160,25 +89,44 @@ class JavaFragment extends Fragment {
 	
 </com.zy.multistatepage.MultiStateContainer>
 ```
+### 2.切换状态
 ```kotlin
-// 重试事件
-viewBinding.container.onRetryEventListener = OnRetryEventListener {
-    loadData()
+multiStateContainer.show<CustomState>()
+// 或
+multiStateContainer.show(CustomState())
+```
+
+#### 更新state信息
+
+```kotlin
+multiStateContainer.show<ErrorState>{ errorState ->
+    errorState.setErrorMsg("xxx出错了")
 }
 ```
-### 2.切换状态
-#### `MultiStateContainer.show<T>()`
-```kotlin
-multiStateContainer.show<XXXState>()
-```
 
-#### `MultiStateContainer.show(MultiState)`
+### 自定义State
+#### 继承`MultiState`
 ```kotlin
-val state = XXXState()
-multiStateContainer.show(state)
-```
+class LottieWaitingState : MultiState() {
+    override fun onCreateMultiStateView(
+        context: Context,
+        inflater: LayoutInflater,
+        container: MultiStateContainer
+    ): View {
+      	// state view
+        return inflater.inflate(R.layout.multi_lottie_waiting, container, false)
+    }
 
-**默认内置3种状态**
+    override fun onMultiStateViewCreate(view: View) {
+        //逻辑处理
+    }
+}
+```
+结合`ViewBidng` 参考 `demo` [MultiStateBinding](app/src/main/java/com/zy/multistatepage/base/MultiStateBinding.kt) 和 [WithBindingState](app/src/main/java/com/zy/multistatepage/state/WithBindingState.kt)
+
+### 使用内置状态配置
+
+**默认内置3种状态（强烈建议您自定义State）**
 
 ```kotlin
 val multiStateContainer = MultiStatePage.bindMultiState(view)
@@ -192,76 +140,7 @@ multiStateContainer.show<EmptyState>()
 multiStateContainer.show<LoadingState>()
 ```
 
-**1.1.0新增 `show(multiState: MultiState)`**
-
-```kotlin
-val lottieOtherState = LottieOtherState()
-lottieOtherState.retry = {
-	Toast.makeText(this, "retry...", Toast.LENGTH_SHORT).show()
-}
-multiStateContainer.show(lottieOtherState)
-```
-
-#### 动态设置state
-
-```kotlin
-multiStateContainer.show<ErrorState>{errorState ->
-    errorState.setErrorMsg("xxx出错了")
-}
-```
-
-#### 设置重试回调
-
-```kotlin
-val multiStateContainer = MultiStatePage.bindMultiState(view){
-    Toast.makeText(context, "retry", Toast.LENGTH_SHORT).show()
-}
-```
-
-### 自定义State
-#### 1.继承`MultiState`
-```kotlin
-class LottieWaitingState : MultiState() {
-    override fun onCreateMultiStateView(
-        context: Context,
-        inflater: LayoutInflater,
-        container: MultiStateContainer
-    ): View {
-        return inflater.inflate(R.layout.multi_lottie_waiting, container, false)
-    }
-
-    override fun onMultiStateViewCreate(view: View) {
-        //逻辑处理
-    }
-    
-    //是否允许重试
-    override fun enableReload(): Boolean = false
-    
-    //指定重试 view
-    override fun bindRetryView(): View? {
-        return retryView
-    }
-}
-```
-`enableReload()` 是否允许`retry`回调 `false`不允许
-
-`bindRetryView` 绑定重试点击事件的`view` 默认为根`view`
-
-结合`ViewBidng` 参考 `demo` [MultiStateBinding](app/src/main/java/com/zy/multistatepage/base/MultiStateBinding.kt) 和 [WithBindingState](app/src/main/java/com/zy/multistatepage/state/WithBindingState.kt)
-
-#### 2.show (1.0.3后无需register)
-
-```kotlin
-class LottieExtActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val multiStateContainer = bindMultiState()
-        multiStateContainer.show<LottieWaitingState>()
-    }
-}
-```
-
-### 使用内置状态配置
+**更换默认资源**
 
 ```kotlin
 class App : Application() {
@@ -292,27 +171,19 @@ class App : Application() {
 可以借助kotlin的拓展函数封装常用的状态
 ```kotlin
 fun MultiStateContainer.showSuccess(callBack: (SuccessState) -> Unit = {}) {
-    show<SuccessState> {
-        callBack.invoke(it)
-    }
+    show<SuccessState> { callBack.invoke(it) }
 }
 
 fun MultiStateContainer.showError(callBack: (ErrorState) -> Unit = {}) {
-    show<ErrorState> {
-        callBack.invoke(it)
-    }
+    show<ErrorState> { callBack.invoke(it) }
 }
 
 fun MultiStateContainer.showEmpty(callBack: (EmptyState) -> Unit = {}) {
-    show<EmptyState> {
-        callBack.invoke(it)
-    }
+    show<EmptyState> { callBack.invoke(it) }
 }
 
 fun MultiStateContainer.showLoading(callBack: (LoadingState) -> Unit = {}) {
-    show<LoadingState> {
-        callBack.invoke(it)
-    }
+    show<LoadingState> { callBack.invoke(it) }
 }
 ```
 
@@ -323,6 +194,7 @@ multiStateContainer.showLoading()
 multiStateContainer.showSuccess()
 ```
 ## 更新日志
+- 2.0.2(2021/07/05) 移除默认的retryListener
 - 2.0.1(2021/03/06) fix 重复状态切换判断异常
 - 2.0.0(2021/03/06) 支持xml中引用MultiStatePage, 代码优化
 - 1.1.1(2021/01/12) 优化`enableReload`处理
@@ -344,11 +216,6 @@ multiStateContainer.showSuccess()
 - [lottie动画资源社区](https://lottiefiles.com/featured)
 - [玩Android](https://www.wanandroid.com/)
 
-## TODO
-
-**如果对你有帮助的话可以点个star支持一下子 谢谢亲**
-
-**本项目会长期维护 欢迎issue指正**
 ## License
 ```
 Copyright (C) 2020. ZhaoYan
