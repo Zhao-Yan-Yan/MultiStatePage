@@ -2,12 +2,6 @@
 
 [![](https://jitpack.io/v/Zhao-Yan-Yan/MultiStatePage.svg)](https://jitpack.io/#Zhao-Yan-Yan/MultiStatePage) [![License](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](https://github.com/Zhao-Yan-Yan/MultiStatePage/blob/master/LICENSE) ![](https://img.shields.io/badge/language-kotlin-orange.svg)
 
-## 下载Demo
-
-点击或者扫描二维码下载
-
-[![QR code](https://note.youdao.com/yws/public/resource/337a20d817085d4975aca9fd6a381d7c/xmlnote/285AC7CCD58446CC91D35BFFC1B547F3/6445)](https://www.pgyer.com/PVAi)
-
 | [Activity](app/src/main/java/com/zy/multistatepage/MultiStateActivity.kt) | [Fragment](app/src/main/java/com/zy/multistatepage/MultiFragmentActivity.kt) | [View](app/src/main/java/com/zy/multistatepage/MultiViewActivity.kt) | [ViewPager2](app/src/main/java/com/zy/multistatepage/ViewPager2Activity.kt) |
 | :-----: | :----: | :----: | :----: |
 | ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c130b72ecd32467daa81ba01a1cd1104~tplv-k3u1fbpfcp-zoom-1.image) | ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/26850300b75c45f5b3492826bb9d679e~tplv-k3u1fbpfcp-zoom-1.image) | ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/89817b91a608459489135b09a32a48ef~tplv-k3u1fbpfcp-zoom-1.image) | ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4b7999fc47124157a2343740ef7280cb~tplv-k3u1fbpfcp-zoom-1.image) |
@@ -43,7 +37,7 @@ Step2. Add the dependency [![](https://jitpack.io/v/Zhao-Yan-Yan/MultiStatePage.
 
 ```
 dependencies {
-    implementation 'com.github.Zhao-Yan-Yan:MultiStatePage:2.0.1'
+    implementation 'com.github.Zhao-Yan-Yan:MultiStatePage:2.0.2'
 }
 ```
 ### 1.生成MultiStateContainer
@@ -102,6 +96,57 @@ multiStateContainer.show(CustomState())
 multiStateContainer.show<ErrorState>{ errorState ->
     errorState.setErrorMsg("xxx出错了")
 }
+```
+
+### 如何添加重试事件（建议自定义State实现）参考 ErrorState
+
+```kotlin
+class ErrorState : MultiState() {
+
+    private lateinit var tvRetry: TextView
+
+    private var retry: OnRetryClickListener? = null
+
+    override fun onCreateMultiStateView(
+        context: Context,
+        inflater: LayoutInflater,
+        container: MultiStateContainer
+    ): View {
+        return inflater.inflate(R.layout.mult_state_error, container, false)
+    }
+
+    override fun onMultiStateViewCreate(view: View) {
+        tvRetry = view.findViewById(R.id.tv_retry)
+        tvRetry.setOnClickListener { retry?.retry() }
+    }
+
+    fun retry(retry: OnRetryClickListener) {
+        this.retry = retry
+    }
+
+    fun interface OnRetryClickListener {
+        fun retry()
+    }
+}
+```
+
+```kotlin
+multiStateContainer.show<ErrorState> { state->
+	state.retry { do() }
+}
+// 或
+val state = ErrorState().apply{
+	retry { do() }
+}
+multiStateContainer.show(state)
+```
+
+### 如何设置默认State
+
+利用kotlin拓展函数可以很轻松的实现
+
+```kotlin
+val multiStateActivityRoot = bindMultiState().apply { showEmpty() }
 ```
 
 ### 自定义State
@@ -187,12 +232,17 @@ fun MultiStateContainer.showLoading(callBack: (LoadingState) -> Unit = {}) {
 }
 ```
 
-调用
 ```kotlin
 val multiStateContainer = bindMultiState()
 multiStateContainer.showLoading()
 multiStateContainer.showSuccess()
 ```
+## 下载Demo
+
+点击或者扫描二维码下载
+
+[![QR code](https://note.youdao.com/yws/public/resource/337a20d817085d4975aca9fd6a381d7c/xmlnote/285AC7CCD58446CC91D35BFFC1B547F3/6445)](https://www.pgyer.com/PVAi)
+
 ## 更新日志
 - 2.0.2(2021/07/05) 移除默认的retryListener
 - 2.0.1(2021/03/06) fix 重复状态切换判断异常

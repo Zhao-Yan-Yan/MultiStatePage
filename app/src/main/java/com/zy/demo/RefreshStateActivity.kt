@@ -20,7 +20,7 @@ class RefreshStateActivity : BaseActivity<ActivityRefreshStateBinding>() {
                     lifecycleScope.launchWhenCreated {
                         multiStateActivityRoot.show<LoadingState>()
                         delay(2000)
-                        multiStateActivityRoot.show<ErrorState> {
+                        multiStateActivityRoot.show(this@apply) {
                             it.setErrorMsg("鸡你太美 ${++count}")
                             it.setErrorIcon(R.mipmap.jntm)
                         }
